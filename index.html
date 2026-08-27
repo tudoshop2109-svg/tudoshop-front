@@ -1784,6 +1784,23 @@ ${d.stock}${d.link}`
       status.classList.remove('active');
     }
   });
+
+  // Aperta Enter em qualquer um desses campos e já dispara a busca/geração,
+  // sem precisar clicar no botão.
+  function triggerOnEnter(inputEl, buttonEl){
+    inputEl.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter'){
+        e.preventDefault();
+        buttonEl.click();
+      }
+    });
+  }
+
+  triggerOnEnter(linkInput, searchBtn);
+  triggerOnEnter(mlName, mlGenerateBtn);
+  triggerOnEnter(mlOldPrice, mlGenerateBtn);
+  triggerOnEnter(mlNewPrice, mlGenerateBtn);
+  triggerOnEnter(mlAffiliateLink, mlGenerateBtn);
 </script>
 </body>
 </html>
