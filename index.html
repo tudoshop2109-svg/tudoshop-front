@@ -141,10 +141,37 @@
   }
 
   .section-label{
-    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;
-    text-transform:uppercase;color:var(--ink-soft);margin:24px 0 10px;
+    font-family:'Inter',sans-serif;font-weight:700;font-size:15px;
+    color:var(--navy);margin:24px 0 10px;
   }
   .category-row{display:flex;gap:9px;flex-wrap:wrap;}
+  .platform-row{display:flex;gap:9px;margin-bottom:6px;}
+  .platform-chip{
+    font-family:'Inter',sans-serif;font-weight:700;font-size:14px;
+    padding:10px 18px;border-radius:22px;border:2px solid var(--line);
+    background:var(--paper-raised);cursor:pointer;color:var(--ink-soft);
+    display:flex;align-items:center;gap:7px;
+  }
+  .platform-chip[data-platform="shopee"]:hover{
+    border-color:#F9590B;color:#F9590B;
+  }
+  .platform-chip[data-platform="ml"]:hover{
+    border-color:#FFD100;color:#B8960A;
+  }
+  .platform-chip.active{
+    background:var(--navy);color:#fff;border-color:var(--navy);
+    box-shadow:0 3px 10px rgba(2,29,84,0.25);
+  }
+  .ml-link-field{display:none;margin-top:14px;}
+  .ml-link-field.active{display:block;}
+  .ml-link-field label{
+    font-size:13px;font-weight:600;color:var(--ink);display:block;margin-bottom:6px;
+  }
+  .ml-link-field input{
+    width:100%;font-family:'Inter',sans-serif;font-size:14px;padding:12px 14px;
+    border:1.5px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);
+  }
+  .ml-link-field .hint-sub{font-size:12px;color:var(--ink-soft);margin-top:6px;}
   .category-chip{
     font-family:'Inter',sans-serif;font-weight:600;font-size:13.5px;
     padding:9px 16px;border-radius:22px;border:1px solid var(--line);
@@ -227,6 +254,22 @@
   .product-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px;line-height:1.25;margin-bottom:9px;}
   .prices{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
   .old-price{font-family:'Space Mono',monospace;font-size:14px;color:var(--ink-soft);text-decoration:line-through;}
+  .old-price-prefix{font-family:'Space Mono',monospace;font-size:12.5px;color:var(--ink-soft);}
+  .new-price-prefix{font-family:'Space Mono',monospace;font-size:12.5px;color:var(--ink-soft);margin-left:4px;}
+  .price-edit{
+    font-family:'Space Mono',monospace;font-weight:700;font-size:14px;
+    border:1px solid var(--line);border-radius:6px;padding:3px 7px;
+    width:82px;background:var(--paper);color:var(--ink-soft);
+    text-decoration:line-through;
+  }
+  .price-edit-new{
+    font-size:18px;color:var(--accent);text-decoration:none;width:92px;
+  }
+  .price-edit:focus{outline:2px solid var(--accent);outline-offset:1px;text-decoration:none;}
+  .price-edit-hint{
+    font-size:11.5px;color:var(--ink-soft);margin-top:8px;line-height:1.4;
+    background:var(--accent-soft);padding:7px 10px;border-radius:8px;
+  }
   .new-price{font-family:'Space Mono',monospace;font-weight:700;font-size:26px;color:var(--accent);}
   .discount-badge{
     font-family:'Space Mono',monospace;font-size:11.5px;font-weight:700;
@@ -312,8 +355,14 @@
     <div class="eyebrow">Gerador de oferta · via link</div>
     <h1>Cole o link. O resto sai sozinho.</h1>
     <p class="sub">Nome, imagem, preço de/por e desconto são buscados automaticamente. A mensagem já sai pronta, variando o modelo a cada oferta.</p>
-    <div class="demo-flag" style="background:#E4F3EB;color:#0C7A4B;border-color:#B7E0C7;">✅ Conectado à API oficial da Shopee — dados reais</div>
+    <div class="demo-flag" id="connFlag" style="background:#E4F3EB;color:#0C7A4B;border-color:#B7E0C7;">✅ Conectado à API oficial da Shopee — dados reais</div>
   </header>
+
+  <div class="section-label">Plataforma</div>
+  <div class="platform-row" id="platformRow">
+    <button type="button" class="platform-chip active" data-platform="shopee">🛍️ Shopee</button>
+    <button type="button" class="platform-chip" data-platform="ml">📦 Mercado Livre</button>
+  </div>
 
   <div class="section-label">Data comemorativa</div>
   <div class="category-row" id="categoryRow">
@@ -340,7 +389,14 @@
       <input type="url" id="link" placeholder="Cole aqui o link do produto na Shopee">
       <button class="search-btn" id="searchBtn">Buscar oferta</button>
     </div>
-    <p class="field-hint">O sistema extrai o ID do produto direto da URL e consulta os dados na Shopee.</p>
+    <p class="field-hint" id="fieldHint">O sistema extrai o ID do produto direto da URL e consulta os dados na Shopee.</p>
+
+    <div class="ml-link-field" id="mlLinkField">
+      <label for="mlAffiliateLink">Link de afiliado do Mercado Livre</label>
+      <input type="url" id="mlAffiliateLink" placeholder="Cole aqui o link de afiliado gerado no painel do ML">
+      <p class="hint-sub">O Mercado Livre não tem API oficial pra gerar esse link sozinho — cole aqui o que você já gerou manualmente no painel de afiliados.</p>
+    </div>
+
     <div class="toggle-row">
       <input type="checkbox" id="stockNote" checked>
       <div>
@@ -362,10 +418,13 @@
         <div class="ticket-label">Encontrado</div>
         <div class="product-name" id="prodName"></div>
         <div class="prices">
-          <span class="old-price" id="oldPriceOut"></span>
-          <span class="new-price" id="newPriceOut"></span>
+          <span class="old-price-prefix">De R$</span>
+          <input type="text" class="price-edit" id="oldPriceInput" inputmode="decimal">
+          <span class="new-price-prefix">Por R$</span>
+          <input type="text" class="price-edit price-edit-new" id="newPriceInput" inputmode="decimal">
           <span class="discount-badge" id="discountOut"></span>
         </div>
+        <p class="price-edit-hint">💡 Achou o desconto errado? A Shopee às vezes manda promoções agendadas que ainda não começaram. Corrija os valores acima se precisar — a mensagem atualiza sozinha.</p>
         <div class="stock-note" id="stockNoteDisplay">Preço sujeito a alteração conforme estoque do fornecedor.</div>
       </div>
     </div>
@@ -396,8 +455,8 @@
   const result = document.getElementById('result');
   const thumb = document.getElementById('thumb');
   const prodName = document.getElementById('prodName');
-  const oldPriceOut = document.getElementById('oldPriceOut');
-  const newPriceOut = document.getElementById('newPriceOut');
+  const oldPriceInput = document.getElementById('oldPriceInput');
+  const newPriceInput = document.getElementById('newPriceInput');
   const discountOut = document.getElementById('discountOut');
   const stockNote = document.getElementById('stockNote');
   const stockNoteDisplay = document.getElementById('stockNoteDisplay');
@@ -410,7 +469,13 @@
   const toggleAll = document.getElementById('toggleAll');
   const allVariants = document.getElementById('allVariants');
   const variantsGrid = document.getElementById('variantsGrid');
+  const platformRow = document.getElementById('platformRow');
+  const mlLinkField = document.getElementById('mlLinkField');
+  const mlAffiliateLink = document.getElementById('mlAffiliateLink');
+  const fieldHint = document.getElementById('fieldHint');
+  const connFlag = document.getElementById('connFlag');
 
+  let currentPlatform = 'shopee';
   let currentProduct = null;
   let currentCategory = 'diaadia';
   let lastIndex = -1;
@@ -420,19 +485,46 @@
     return val.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
   }
 
+  // Converte texto digitado no formato brasileiro (ex: "129,17") de volta
+  // para número, para permitir edição manual do preço quando a API
+  // trouxer um desconto que não bate com a página real (ex: promoção
+  // agendada que ainda não começou).
+  function parseBRL(str){
+    const cleaned = String(str).replace(/[^\d,.-]/g, '').replace(',', '.');
+    const val = parseFloat(cleaned);
+    return isNaN(val) ? 0 : val;
+  }
+
+  function applyPriceEdits(){
+    if(!currentProduct) return;
+    currentProduct.oldPrice = parseBRL(oldPriceInput.value);
+    currentProduct.newPrice = parseBRL(newPriceInput.value);
+    updateDiscountBadge();
+    lastIndex = -1;
+    refreshAll();
+  }
+
+  function updateDiscountBadge(){
+    const discountPct = currentProduct.oldPrice > currentProduct.newPrice
+      ? Math.round((1 - currentProduct.newPrice/currentProduct.oldPrice) * 100)
+      : 0;
+    discountOut.textContent = discountPct > 0 ? `-${discountPct}% OFF` : 'Sem desconto ativo';
+  }
+
   function extractIds(url){
     const match = url.match(/i\.(\d+)\.(\d+)/) || url.match(/product\/(\d+)\/(\d+)/);
     if(!match) return null;
     return { shopId: match[1], itemId: match[2] };
   }
 
-  const BACKEND_URL = 'https://tudoshop-backend.vercel.app/api/product';
+  const BACKEND_URL_SHOPEE = 'https://tudoshop-backend.vercel.app/api/product';
+  const BACKEND_URL_ML = 'https://tudoshop-backend.vercel.app/api/product-ml';
 
-  // Chama o backend real na Vercel, que por sua vez consulta a API
-  // oficial de Afiliados da Shopee e devolve nome, imagem, preço e
-  // link de afiliado do produto.
-  async function fetchProduct(productUrl){
-    const endpoint = `${BACKEND_URL}?url=${encodeURIComponent(productUrl)}`;
+  // Chama o backend real na Vercel, que consulta a API oficial de
+  // Afiliados da Shopee e devolve nome, imagem, preço e link de
+  // afiliado do produto (gerado automaticamente).
+  async function fetchProductShopee(productUrl){
+    const endpoint = `${BACKEND_URL_SHOPEE}?url=${encodeURIComponent(productUrl)}`;
     const response = await fetch(endpoint);
     const data = await response.json();
 
@@ -446,6 +538,27 @@
       newPrice: data.newPrice,
       image: data.image,
       affiliateLink: data.affiliateLink
+    };
+  }
+
+  // Chama o backend do Mercado Livre, que usa a API pública de itens
+  // pra puxar nome, imagem e preço. O ML não tem API de afiliados
+  // oficial, então o link final vem do campo preenchido manualmente.
+  async function fetchProductML(productUrl){
+    const endpoint = `${BACKEND_URL_ML}?url=${encodeURIComponent(productUrl)}`;
+    const response = await fetch(endpoint);
+    const data = await response.json();
+
+    if(!response.ok || data.error){
+      throw new Error(data.error || 'Não foi possível consultar esse produto.');
+    }
+
+    return {
+      name: data.name,
+      oldPrice: data.oldPrice,
+      newPrice: data.newPrice,
+      image: data.image,
+      affiliateLink: null
     };
   }
 
@@ -1518,6 +1631,10 @@ ${d.stock}${d.link}`
   });
 
   stockNote.addEventListener('change', refreshAll);
+  oldPriceInput.addEventListener('change', applyPriceEdits);
+  newPriceInput.addEventListener('change', applyPriceEdits);
+  oldPriceInput.addEventListener('blur', applyPriceEdits);
+  newPriceInput.addEventListener('blur', applyPriceEdits);
   rerollBtn.addEventListener('click', () => renderPrimary(true));
 
   toggleAll.addEventListener('click', () => {
@@ -1538,6 +1655,37 @@ ${d.stock}${d.link}`
     });
   });
 
+  platformRow.addEventListener('click', (e) => {
+    const btn = e.target.closest('.platform-chip');
+    if(!btn) return;
+    [...platformRow.children].forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    currentPlatform = btn.dataset.platform;
+
+    result.classList.remove('active');
+    errorBox.classList.remove('active');
+    linkInput.value = '';
+    currentProduct = null;
+
+    if(currentPlatform === 'ml'){
+      linkInput.placeholder = 'Cole aqui o link do produto no Mercado Livre';
+      fieldHint.textContent = 'O sistema extrai o ID do produto direto da URL e consulta os dados no Mercado Livre.';
+      mlLinkField.classList.add('active');
+      connFlag.textContent = '✅ Conectado à API pública do Mercado Livre — link de afiliado manual';
+      connFlag.style.background = '#FFF3E0';
+      connFlag.style.color = '#D6480A';
+      connFlag.style.borderColor = '#FCD9B0';
+    } else {
+      linkInput.placeholder = 'Cole aqui o link do produto na Shopee';
+      fieldHint.textContent = 'O sistema extrai o ID do produto direto da URL e consulta os dados na Shopee.';
+      mlLinkField.classList.remove('active');
+      connFlag.textContent = '✅ Conectado à API oficial da Shopee — dados reais';
+      connFlag.style.background = '#E4F3EB';
+      connFlag.style.color = '#0C7A4B';
+      connFlag.style.borderColor = '#B7E0C7';
+    }
+  });
+
   searchBtn.addEventListener('click', async () => {
     const url = linkInput.value.trim();
     errorBox.classList.remove('active');
@@ -1549,26 +1697,37 @@ ${d.stock}${d.link}`
       return;
     }
 
+    if(currentPlatform === 'ml' && !mlAffiliateLink.value.trim()){
+      errorBox.textContent = 'Cole o link de afiliado do Mercado Livre antes de buscar (ele não é gerado automaticamente).';
+      errorBox.classList.add('active');
+      return;
+    }
+
     searchBtn.disabled = true;
     status.classList.add('active');
 
     try{
-      const product = await fetchProduct(url);
+      const product = currentPlatform === 'ml'
+        ? await fetchProductML(url)
+        : await fetchProductShopee(url);
       currentProduct = product;
 
-      // Usa o link de afiliado devolvido pela Shopee (já rastreado),
-      // em vez do link original colado pelo usuário.
-      if(product.affiliateLink) linkInput.value = product.affiliateLink;
+      if(currentPlatform === 'ml'){
+        // ML não gera link de afiliado automaticamente — usa o que
+        // a pessoa colou manualmente no campo próprio.
+        linkInput.value = mlAffiliateLink.value.trim();
+      } else if(product.affiliateLink){
+        // Usa o link de afiliado devolvido pela Shopee (já rastreado),
+        // em vez do link original colado pelo usuário.
+        linkInput.value = product.affiliateLink;
+      }
 
       thumb.src = product.image;
       thumb.alt = product.name;
       prodName.textContent = product.name;
-      oldPriceOut.textContent = `R$ ${formatBRL(product.oldPrice)}`;
-      newPriceOut.textContent = `R$ ${formatBRL(product.newPrice)}`;
-      const discountPct = product.oldPrice > product.newPrice
-        ? Math.round((1 - product.newPrice/product.oldPrice) * 100)
-        : 0;
-      discountOut.textContent = discountPct > 0 ? `-${discountPct}% OFF` : 'Sem desconto ativo';
+      oldPriceInput.value = formatBRL(product.oldPrice);
+      newPriceInput.value = formatBRL(product.newPrice);
+      updateDiscountBadge();
 
       result.classList.add('active');
       allVariants.classList.remove('active');
