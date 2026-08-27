@@ -172,6 +172,8 @@
     border:1.5px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);
   }
   .ml-link-field .hint-sub{font-size:12px;color:var(--ink-soft);margin-top:6px;}
+  .ml-price-row{display:flex;gap:10px;margin-top:12px;}
+  .ml-price-row > div{flex:1;}
   .category-chip{
     font-family:'Inter',sans-serif;font-weight:600;font-size:13.5px;
     padding:9px 16px;border-radius:22px;border:1px solid var(--line);
@@ -237,6 +239,7 @@
     grid-template-columns:92px 1fr;gap:18px;
     box-shadow:0 4px 18px rgba(10,27,61,0.08);
   }
+  .ticket.no-image{grid-template-columns:1fr;}
   .ticket::before, .ticket::after{
     content:"";position:absolute;width:22px;height:22px;background:var(--paper);
     border:1px solid var(--line);border-radius:50%;top:50%;transform:translateY(-50%);
@@ -385,11 +388,27 @@
   </div>
 
   <div class="search-panel">
-    <div class="search-row">
+    <div class="search-row" id="searchRow">
       <input type="url" id="link" placeholder="Cole aqui o link do produto na Shopee">
       <button class="search-btn" id="searchBtn">Buscar oferta</button>
     </div>
     <p class="field-hint" id="fieldHint">O sistema extrai o ID do produto direto da URL e consulta os dados na Shopee.</p>
+
+    <div class="ml-link-field" id="mlManualFields">
+      <label for="mlName">Nome do produto</label>
+      <input type="text" id="mlName" placeholder="Ex: Creatina Monohidratada 250g">
+      <div class="ml-price-row">
+        <div>
+          <label for="mlOldPrice">Preço "De" (opcional, só se tiver desconto)</label>
+          <input type="text" id="mlOldPrice" placeholder="Ex: 89,90">
+        </div>
+        <div>
+          <label for="mlNewPrice">Preço "Por"</label>
+          <input type="text" id="mlNewPrice" placeholder="Ex: 59,90">
+        </div>
+      </div>
+      <button class="search-btn" id="mlGenerateBtn" style="margin-top:12px;width:100%;">Gerar oferta</button>
+    </div>
 
     <div class="ml-link-field" id="mlLinkField">
       <label for="mlAffiliateLink">Link de afiliado do Mercado Livre</label>
@@ -471,6 +490,12 @@
   const variantsGrid = document.getElementById('variantsGrid');
   const platformRow = document.getElementById('platformRow');
   const mlLinkField = document.getElementById('mlLinkField');
+  const mlManualFields = document.getElementById('mlManualFields');
+  const mlGenerateBtn = document.getElementById('mlGenerateBtn');
+  const mlName = document.getElementById('mlName');
+  const mlOldPrice = document.getElementById('mlOldPrice');
+  const mlNewPrice = document.getElementById('mlNewPrice');
+  const searchRow = document.getElementById('searchRow');
   const mlAffiliateLink = document.getElementById('mlAffiliateLink');
   const fieldHint = document.getElementById('fieldHint');
   const connFlag = document.getElementById('connFlag');
@@ -511,6 +536,50 @@
     discountOut.textContent = discountPct > 0 ? `-${discountPct}% OFF` : 'Sem desconto ativo';
   }
 
+  // Gera a oferta manualmente (Mercado Livre): não busca nada, só monta
+  // o "produto" a partir do que a pessoa digitou nos campos.
+  mlGenerateBtn.addEventListener('click', () => {
+    errorBox.classList.remove('active');
+
+    const name = mlName.value.trim();
+    const newPriceVal = parseBRL(mlNewPrice.value);
+    const affLink = mlAffiliateLink.value.trim();
+
+    if(!name){
+      errorBox.textContent = 'Digite o nome do produto.';
+      errorBox.classList.add('active');
+      return;
+    }
+    if(!newPriceVal){
+      errorBox.textContent = 'Digite o preço "Por" do produto.';
+      errorBox.classList.add('active');
+      return;
+    }
+    if(!affLink){
+      errorBox.textContent = 'Cole o link de afiliado do Mercado Livre.';
+      errorBox.classList.add('active');
+      return;
+    }
+
+    const oldPriceVal = parseBRL(mlOldPrice.value) || newPriceVal;
+
+    currentProduct = { name, oldPrice: oldPriceVal, newPrice: newPriceVal, image: null };
+    linkInput.value = affLink;
+
+    thumb.style.display = 'none';
+    document.querySelector('.ticket').classList.add('no-image');
+    prodName.textContent = name;
+    oldPriceInput.value = formatBRL(oldPriceVal);
+    newPriceInput.value = formatBRL(newPriceVal);
+    updateDiscountBadge();
+
+    result.classList.add('active');
+    allVariants.classList.remove('active');
+    toggleAll.textContent = 'Ver todos os modelos desta categoria ▾';
+    lastIndex = -1;
+    refreshAll();
+  });
+
   function extractIds(url){
     const match = url.match(/i\.(\d+)\.(\d+)/) || url.match(/product\/(\d+)\/(\d+)/);
     if(!match) return null;
@@ -538,27 +607,6 @@
       newPrice: data.newPrice,
       image: data.image,
       affiliateLink: data.affiliateLink
-    };
-  }
-
-  // Chama o backend do Mercado Livre, que usa a API pública de itens
-  // pra puxar nome, imagem e preço. O ML não tem API de afiliados
-  // oficial, então o link final vem do campo preenchido manualmente.
-  async function fetchProductML(productUrl){
-    const endpoint = `${BACKEND_URL_ML}?url=${encodeURIComponent(productUrl)}`;
-    const response = await fetch(endpoint);
-    const data = await response.json();
-
-    if(!response.ok || data.error){
-      throw new Error(data.error || 'Não foi possível consultar esse produto.');
-    }
-
-    return {
-      name: data.name,
-      oldPrice: data.oldPrice,
-      newPrice: data.newPrice,
-      image: data.image,
-      affiliateLink: null
     };
   }
 
@@ -1668,16 +1716,20 @@ ${d.stock}${d.link}`
     currentProduct = null;
 
     if(currentPlatform === 'ml'){
-      linkInput.placeholder = 'Cole aqui o link do produto no Mercado Livre';
-      fieldHint.textContent = 'O sistema extrai o ID do produto direto da URL e consulta os dados no Mercado Livre.';
+      searchRow.style.display = 'none';
+      fieldHint.style.display = 'none';
+      mlManualFields.classList.add('active');
       mlLinkField.classList.add('active');
-      connFlag.textContent = '✅ Conectado à API pública do Mercado Livre — link de afiliado manual';
+      connFlag.textContent = '✍️ Modo manual — preencha os dados do produto do Mercado Livre';
       connFlag.style.background = '#FFF3E0';
       connFlag.style.color = '#D6480A';
       connFlag.style.borderColor = '#FCD9B0';
     } else {
+      searchRow.style.display = '';
+      fieldHint.style.display = '';
       linkInput.placeholder = 'Cole aqui o link do produto na Shopee';
       fieldHint.textContent = 'O sistema extrai o ID do produto direto da URL e consulta os dados na Shopee.';
+      mlManualFields.classList.remove('active');
       mlLinkField.classList.remove('active');
       connFlag.textContent = '✅ Conectado à API oficial da Shopee — dados reais';
       connFlag.style.background = '#E4F3EB';
@@ -1697,31 +1749,21 @@ ${d.stock}${d.link}`
       return;
     }
 
-    if(currentPlatform === 'ml' && !mlAffiliateLink.value.trim()){
-      errorBox.textContent = 'Cole o link de afiliado do Mercado Livre antes de buscar (ele não é gerado automaticamente).';
-      errorBox.classList.add('active');
-      return;
-    }
-
     searchBtn.disabled = true;
     status.classList.add('active');
 
     try{
-      const product = currentPlatform === 'ml'
-        ? await fetchProductML(url)
-        : await fetchProductShopee(url);
+      const product = await fetchProductShopee(url);
       currentProduct = product;
 
-      if(currentPlatform === 'ml'){
-        // ML não gera link de afiliado automaticamente — usa o que
-        // a pessoa colou manualmente no campo próprio.
-        linkInput.value = mlAffiliateLink.value.trim();
-      } else if(product.affiliateLink){
+      if(product.affiliateLink){
         // Usa o link de afiliado devolvido pela Shopee (já rastreado),
         // em vez do link original colado pelo usuário.
         linkInput.value = product.affiliateLink;
       }
 
+      thumb.style.display = '';
+      document.querySelector('.ticket').classList.remove('no-image');
       thumb.src = product.image;
       thumb.alt = product.name;
       prodName.textContent = product.name;
