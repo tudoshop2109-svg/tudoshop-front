@@ -454,166 +454,947 @@
   // spacing, or is empty when the toggle is off.
   const CATS = {
     diaadia: { label: 'Dia a dia', templates: [
-      d => `🔥 OFERTA RELÂMPAGO 🔥\n\n${d.name}\n\nDe: ${d.oldFmt}\n💥 Por: ${d.newFmt}${d.pct}\n\n${d.stock}👉 ${d.link}`,
-      d => `😱 ACHADO DO DIA\n\n${d.name}\n\nDe ${d.oldFmt} por apenas ${d.newFmt}${d.pct}\n\n${d.stock}🔗 ${d.link}`,
-      d => `⚡ CORRE QUE TÁ VALENDO ⚡\n\n${d.name}\n\n${d.newFmt} (antes ${d.oldFmt})${d.pct}\n\n${d.stock}👇 Garanta o seu\n${d.link}`,
-      d => `🎯 OFERTA DO DIA\n\n${d.name}\n\n${d.oldFmt} → ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🚨 ÚLTIMAS UNIDADES 🚨\n\n${d.name}\n\n💰 De: ${d.oldFmt}\n💰 Por: ${d.newFmt}${d.pct}\n\n${d.stock}Confira aqui 👉 ${d.link}`,
-      d => `💣 BOMBA DE OFERTA 💣\n\n${d.name}\n\nSaiu por ${d.newFmt}${d.pct} (preço normal ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🛍️ Olha o que eu achei pra vocês:\n\n${d.name}\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}Link: ${d.link}`,
-      d => `✨ SUPER OFERTA ✨\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}🛒 ${d.link}`,
-      d => `👀 Vale muito a pena essa aqui:\n\n${d.name}\n\n${d.newFmt} no lugar de ${d.oldFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🔔 ALERTA DE OFERTA 🔔\n\n${d.name}\n\n${d.oldFmt}\n${d.newFmt}${d.pct}\n\n${d.stock}👉 ${d.link}`,
-      d => `💥 DESCONTO IMPERDÍVEL 💥\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}Corre lá: ${d.link}`,
-      d => `🏷️ PROMOÇÃO SECRETA 🏷️\n\n${d.name}\n\nSó hoje: ${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🎁 Separei essa pra quem tava esperando:\n\n${d.name}\n\nDe ${d.oldFmt} → Por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `📉 PREÇO DESPENCOU 📉\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}👉 ${d.link}`,
-      d => `🙌 Oferta boa igual essa não teve:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🛒 Bora aproveitar:\n\n${d.name}\n\n${d.newFmt} (de ${d.oldFmt})${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🔥 Pra quem tava de olho:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🌟 DESTAQUE DO DIA 🌟\n\n${d.name}\n\n${d.newFmt}${d.pct} (era ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🚀 Oferta voando baixo:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🤑 Tá barato assim:\n\n${d.name}\n\n${d.newFmt}${d.pct} — antes ${d.oldFmt}\n\n${d.stock}${d.link}`,
-      d => `📢 Fica ligado nessa:\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `💎 ACHADO IMPERDÍVEL 💎\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🧨 Preço bombou:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🛎️ Chegou a oferta:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `😍 Isso aqui é bom demais:\n\n${d.name}\n\n${d.oldFmt} → ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `⏰ Por tempo limitado:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🔎 Garimpei essa pra vocês:\n\n${d.name}\n\n${d.newFmt}${d.pct} (valor normal ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🥳 Vale a pena conferir:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `📦 Chegou oferta nova:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`
+      d => `🔥 OFERTA RELÂMPAGO 🔥
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}👉 ${d.link}`,
+      d => `😱 ACHADO DO DIA
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}🔗 ${d.link}`,
+      d => `⚡ CORRE QUE TÁ VALENDO ⚡
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}👇 Garanta o seu
+${d.link}`,
+      d => `🎯 OFERTA DO DIA
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🚨 ÚLTIMAS UNIDADES 🚨
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}Confira aqui 👉 ${d.link}`,
+      d => `💣 BOMBA DE OFERTA 💣
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🛍️ Olha o que eu achei pra vocês:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}Link: ${d.link}`,
+      d => `✨ SUPER OFERTA ✨
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}🛒 ${d.link}`,
+      d => `👀 Vale muito a pena essa aqui:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🔔 ALERTA DE OFERTA 🔔
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}👉 ${d.link}`,
+      d => `💥 DESCONTO IMPERDÍVEL 💥
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}Corre lá: ${d.link}`,
+      d => `🏷️ PROMOÇÃO SECRETA 🏷️
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎁 Separei essa pra quem tava esperando:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `📉 PREÇO DESPENCOU 📉
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}👉 ${d.link}`,
+      d => `🙌 Oferta boa igual essa não teve:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🛒 Bora aproveitar:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🔥 Pra quem tava de olho:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🌟 DESTAQUE DO DIA 🌟
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🚀 Oferta voando baixo:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🤑 Tá barato assim:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `📢 Fica ligado nessa:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `💎 ACHADO IMPERDÍVEL 💎
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🧨 Preço bombou:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🛎️ Chegou a oferta:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `😍 Isso aqui é bom demais:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `⏰ Por tempo limitado:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🔎 Garimpei essa pra vocês:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🥳 Vale a pena conferir:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `📦 Chegou oferta nova:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`
     ]},
     pascoa: { label: 'Páscoa', templates: [
-      d => `🐰 OFERTA DE PÁSCOA 🐰\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}🥚 ${d.link}`,
-      d => `🍫 PÁSCOA COM DESCONTO 🍫\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🐣 Coelhinho trouxe oferta boa:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🥚 OVO DE OFERTA 🥚\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🌸 Páscoa chegando, economia também:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🐰 Aproveite antes que acabe (que nem chocolate na Páscoa):\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🍬 Doce oferta de Páscoa:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🐇 Especial de Páscoa:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`
+      d => `🐰 OFERTA DE PÁSCOA 🐰
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}🥚 ${d.link}`,
+      d => `🍫 PÁSCOA COM DESCONTO 🍫
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🐣 Coelhinho trouxe oferta boa:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🥚 OVO DE OFERTA 🥚
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🌸 Páscoa chegando, economia também:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🐰 Aproveite antes que acabe (que nem chocolate na Páscoa):
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🍬 Doce oferta de Páscoa:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🐇 Especial de Páscoa:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`
     ]},
     namorados: { label: 'Dia dos Namorados', templates: [
-      d => `❤️ OFERTA DO DIA DOS NAMORADOS ❤️\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}💕 ${d.link}`,
-      d => `💘 Presente pro seu par com desconto:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `💝 Mostra que ama (e economiza):\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `💌 Especial dia dos namorados:\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `💞 Surpreenda com essa oferta:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🌹 Ideia de presente romântico:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `💑 Pro casal aproveitar:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `❤️ Últimos dias pra garantir o presente:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`
+      d => `❤️ OFERTA DO DIA DOS NAMORADOS ❤️
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}💕 ${d.link}`,
+      d => `💘 Presente pro seu par com desconto:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `💝 Mostra que ama (e economiza):
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `💌 Especial dia dos namorados:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `💞 Surpreenda com essa oferta:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🌹 Ideia de presente romântico:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `💑 Pro casal aproveitar:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `❤️ Últimos dias pra garantir o presente:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`
     ]},
     maes: { label: 'Dia das Mães', templates: [
-      d => `🌷 OFERTA DIA DAS MÃES 🌷\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}💐 ${d.link}`,
-      d => `👩‍👧 Presente pra mãe com desconto:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `💐 Mostra carinho gastando pouco:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🌸 Especial dia das mães:\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `💝 Ideia de presente pra mamãe:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `👑 Ela merece (e cabe no bolso):\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🌼 Prepare o presente com antecedência:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `💕 Pro dia mais especial do ano:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎀 Presente com carinho e desconto:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🌺 Últimos dias pra garantir o presente da mãe:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`
+      d => `🌷 OFERTA DIA DAS MÃES 🌷
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}💐 ${d.link}`,
+      d => `👩‍👧 Presente pra mãe com desconto:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `💐 Mostra carinho gastando pouco:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🌸 Especial dia das mães:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `💝 Ideia de presente pra mamãe:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `👑 Ela merece (e cabe no bolso):
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🌼 Prepare o presente com antecedência:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `💕 Pro dia mais especial do ano:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎀 Presente com carinho e desconto:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🌺 Últimos dias pra garantir o presente da mãe:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`
     ]},
     natal: { label: 'Natal', templates: [
-      d => `🎄 OFERTA DE NATAL 🎄\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}🎁 ${d.link}`,
-      d => `🎅 Papai Noel adiantou o presente:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🔔 SINO DE OFERTA 🔔\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎁 Presente de Natal por esse preço:\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `❄️ Natal chegando com desconto:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎄 Ideia de presente + economia:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🌟 Estrela de Natal nessa oferta:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎅 Última chamada antes do Natal:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`
+      d => `🎄 OFERTA DE NATAL 🎄
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}🎁 ${d.link}`,
+      d => `🎅 Papai Noel adiantou o presente:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🔔 SINO DE OFERTA 🔔
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎁 Presente de Natal por esse preço:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `❄️ Natal chegando com desconto:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎄 Ideia de presente + economia:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🌟 Estrela de Natal nessa oferta:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎅 Última chamada antes do Natal:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`
     ]},
     anonovo: { label: 'Ano Novo', templates: [
-      d => `🎆 OFERTA DE ANO NOVO 🎆\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}🥂 ${d.link}`,
-      d => `🥂 Começa o ano economizando:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `✨ Virada de ano, preço também virou:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎇 Fecha o ano com essa oferta:\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🕛 Contagem regressiva pra economizar:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎊 Ano novo, oferta nova:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🌠 Que o ano comece com economia:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🥳 Réveillon com desconto:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`
+      d => `🎆 OFERTA DE ANO NOVO 🎆
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}🥂 ${d.link}`,
+      d => `🥂 Começa o ano economizando:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `✨ Virada de ano, preço também virou:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎇 Fecha o ano com essa oferta:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🕛 Contagem regressiva pra economizar:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎊 Ano novo, oferta nova:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🌠 Que o ano comece com economia:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🥳 Réveillon com desconto:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`
     ]},
     voltaaulas: { label: 'Volta às Aulas', templates: [
-      d => `🎒 OFERTA VOLTA ÀS AULAS 🎒\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}📚 ${d.link}`,
-      d => `✏️ Prepare o material com desconto:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `📚 Ano letivo começando, economia também:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🖍️ Kit escolar por esse preço:\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎓 Comece o ano organizado:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `📝 Última chamada pra volta às aulas:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`
+      d => `🎒 OFERTA VOLTA ÀS AULAS 🎒
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}📚 ${d.link}`,
+      d => `✏️ Prepare o material com desconto:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `📚 Ano letivo começando, economia também:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🖍️ Kit escolar por esse preço:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎓 Comece o ano organizado:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `📝 Última chamada pra volta às aulas:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`
     ]},
     carnaval: { label: 'Carnaval', templates: [
-      d => `🎉 OFERTA DE CARNAVAL 🎉\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}🎊 ${d.link}`,
-      d => `🥳 Bloco da economia chegou:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🎭 Aproveite antes da folia:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🪅 Confete de desconto:\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎶 Preço caiu na folia:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎊 Pula Carnaval com essa oferta:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`
+      d => `🎉 OFERTA DE CARNAVAL 🎉
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}🎊 ${d.link}`,
+      d => `🥳 Bloco da economia chegou:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎭 Aproveite antes da folia:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🪅 Confete de desconto:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎶 Preço caiu na folia:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎊 Pula Carnaval com essa oferta:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`
     ]},
     consumidor: { label: 'Dia do Consumidor', templates: [
-      d => `⚖️ OFERTA DIA DO CONSUMIDOR ⚖️\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}🛒 ${d.link}`,
-      d => `🛍️ Hoje o desconto é seu direito:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `📅 15 de março com preço especial:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎯 Semana do consumidor, oferta boa:\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `✅ Desconto pensado em você:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🛒 Comemore com economia:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`
+      d => `⚖️ OFERTA DIA DO CONSUMIDOR ⚖️
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}🛒 ${d.link}`,
+      d => `🛍️ Hoje o desconto é seu direito:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `📅 15 de março com preço especial:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎯 Semana do consumidor, oferta boa:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `✅ Desconto pensado em você:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🛒 Comemore com economia:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`
     ]},
     junina: { label: 'Festa Junina', templates: [
-      d => `🌽 OFERTA DE FESTA JUNINA 🌽\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}🔥 ${d.link}`,
-      d => `🎪 Arraiá de descontos:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🌾 Preço bom que nem quentão:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎇 Fogueira de ofertas:\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🤠 Corre pro arraial de ofertas:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🌽 Quadrilha de desconto:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`
+      d => `🌽 OFERTA DE FESTA JUNINA 🌽
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}🔥 ${d.link}`,
+      d => `🎪 Arraiá de descontos:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🌾 Preço bom que nem quentão:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎇 Fogueira de ofertas:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🤠 Corre pro arraial de ofertas:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🌽 Quadrilha de desconto:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`
     ]},
     pais: { label: 'Dia dos Pais', templates: [
-      d => `👔 OFERTA DIA DOS PAIS 👔\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}🎁 ${d.link}`,
-      d => `👨‍👧 Presente pro pai com desconto:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🛠️ Mostra que lembrou dele:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎯 Especial dia dos pais:\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `💼 Ideia de presente pro pai:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🏆 Ele merece esse presente:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`
+      d => `👔 OFERTA DIA DOS PAIS 👔
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}🎁 ${d.link}`,
+      d => `👨‍👧 Presente pro pai com desconto:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🛠️ Mostra que lembrou dele:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎯 Especial dia dos pais:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `💼 Ideia de presente pro pai:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🏆 Ele merece esse presente:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`
     ]},
     independencia: { label: 'Independência', templates: [
-      d => `🇧🇷 OFERTA DA INDEPENDÊNCIA 🇧🇷\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}🎆 ${d.link}`,
-      d => `💚💛 Sete de setembro com desconto:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🎉 Liberte seu bolso desse preço:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🇧🇷 Independência é economizar:\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎊 Feriado com oferta especial:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`
+      d => `🇧🇷 OFERTA DA INDEPENDÊNCIA 🇧🇷
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}🎆 ${d.link}`,
+      d => `💚💛 Sete de setembro com desconto:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎉 Liberte seu bolso desse preço:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🇧🇷 Independência é economizar:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎊 Feriado com oferta especial:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`
     ]},
     cliente: { label: 'Dia do Cliente', templates: [
-      d => `🤝 OFERTA DIA DO CLIENTE 🤝\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}💛 ${d.link}`,
-      d => `🙌 Hoje o desconto é por você:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `❤️ Obrigado por confiar na gente:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎁 Presente especial de cliente:\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🌟 Você merece esse preço:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🤝 15 de setembro com oferta:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`
+      d => `🤝 OFERTA DIA DO CLIENTE 🤝
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}💛 ${d.link}`,
+      d => `🙌 Hoje o desconto é por você:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `❤️ Obrigado por confiar na gente:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎁 Presente especial de cliente:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🌟 Você merece esse preço:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🤝 15 de setembro com oferta:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`
     ]},
     criancas: { label: 'Dia das Crianças', templates: [
-      d => `🧸 OFERTA DIA DAS CRIANÇAS 🧸\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}🎈 ${d.link}`,
-      d => `🎁 Presente pra criançada com desconto:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🧒 Alegra a criançada gastando pouco:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎠 Especial dia das crianças:\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🪀 Ideia de presente pros pequenos:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎈 Sorriso garantido com esse preço:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`
+      d => `🧸 OFERTA DIA DAS CRIANÇAS 🧸
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}🎈 ${d.link}`,
+      d => `🎁 Presente pra criançada com desconto:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🧒 Alegra a criançada gastando pouco:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎠 Especial dia das crianças:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🪀 Ideia de presente pros pequenos:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎈 Sorriso garantido com esse preço:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`
     ]},
     halloween: { label: 'Halloween', templates: [
-      d => `🎃 OFERTA DE HALLOWEEN 🎃\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}👻 ${d.link}`,
-      d => `👻 Preço assustadoramente bom:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `🕸️ Doçura ou desconto? As duas:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🦇 Oferta que dá medo de perder:\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🎃 Especial Halloween:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🍬 Trick or treat, o desconto é seu:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`
+      d => `🎃 OFERTA DE HALLOWEEN 🎃
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}👻 ${d.link}`,
+      d => `👻 Preço assustadoramente bom:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🕸️ Doçura ou desconto? As duas:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🦇 Oferta que dá medo de perder:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🎃 Especial Halloween:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🍬 Trick or treat, o desconto é seu:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`
     ]},
     blackfriday: { label: 'Black Friday', templates: [
-      d => `🖤 BLACK FRIDAY 🖤\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}⚡ ${d.link}`,
-      d => `🔥 MAIOR DESCONTO DO ANO 🔥\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`,
-      d => `⏳ Só até acabar o estoque:\n\n${d.name}\n\nDe ${d.oldFmt} por ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `💣 PREÇO EXPLODIU (pra baixo):\n\n${d.name}\n\n${d.oldFmt} agora ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🏃 Corre que é Black Friday:\n\n${d.name}\n\nDe: ${d.oldFmt}\nPor: ${d.newFmt}${d.pct}\n\n${d.stock}${d.link}`,
-      d => `🖤 Esse desconto some rápido:\n\n${d.name}\n\n${d.newFmt}${d.pct} (de ${d.oldFmt})\n\n${d.stock}${d.link}`
+      d => `🖤 BLACK FRIDAY 🖤
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}⚡ ${d.link}`,
+      d => `🔥 MAIOR DESCONTO DO ANO 🔥
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `⏳ Só até acabar o estoque:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `💣 PREÇO EXPLODIU (pra baixo):
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🏃 Corre que é Black Friday:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`,
+      d => `🖤 Esse desconto some rápido:
+
+${d.name}
+
+${d.priceBlock}
+
+${d.stock}${d.link}`
     ]}
   };
 
@@ -622,14 +1403,18 @@
     const discountPct = oldPrice > newPrice ? Math.round((1 - newPrice/oldPrice) * 100) : null;
     const oldFormatted = formatBRL(oldPrice);
     const newFormatted = formatBRL(newPrice);
+    const hasDiscount = !!discountPct;
+    // Padrão fixo de exibição do preço:
+    // Com desconto: "De: ~R$ X~" numa linha, "💥 *Por: R$ Y*" na linha seguinte.
+    // Sem desconto: só "*R$ Y*" em negrito, sem "De"/"Por".
+    const priceBlock = hasDiscount
+      ? `De: ~R$ ${oldFormatted}~\n💥 *Por: R$ ${newFormatted}*${discountPct ? ` (-${discountPct}%)` : ''}`
+      : `*R$ ${newFormatted}*`;
     return {
       name,
       old: oldFormatted,
       new: newFormatted,
-      // Formatação padrão do WhatsApp: ~texto~ risca, *texto* deixa em negrito.
-      oldFmt: `~R$ ${oldFormatted}~`,
-      newFmt: `*R$ ${newFormatted}*`,
-      pct: discountPct ? ` (-${discountPct}%)` : '',
+      priceBlock,
       link: linkInput.value.trim(),
       stock: stockNote.checked ? '⚠️ Preço pode variar conforme o estoque do fornecedor.\n\n' : ''
     };
