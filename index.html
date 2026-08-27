@@ -1406,10 +1406,10 @@ ${d.stock}${d.link}`
     const hasDiscount = !!discountPct;
     // Padrão fixo de exibição do preço:
     // Com desconto: "De: ~R$ X~" numa linha, "💥 *Por: R$ Y*" na linha seguinte.
-    // Sem desconto: só "*R$ Y*" em negrito, sem "De"/"Por".
+    // Sem desconto: "Preço: *R$ Y*", sem "De"/"Por".
     const priceBlock = hasDiscount
       ? `De: ~R$ ${oldFormatted}~\n💥 *Por: R$ ${newFormatted}*${discountPct ? ` (-${discountPct}%)` : ''}`
-      : `*R$ ${newFormatted}*`;
+      : `Preço: *R$ ${newFormatted}*`;
     return {
       name,
       old: oldFormatted,
