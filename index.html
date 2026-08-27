@@ -171,6 +171,11 @@
     width:100%;font-family:'Inter',sans-serif;font-size:14px;padding:12px 14px;
     border:1.5px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);
   }
+  .ml-link-field textarea{
+    width:100%;font-family:'Inter',sans-serif;font-size:13.5px;padding:12px 14px;
+    border:1.5px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);
+    resize:vertical;
+  }
   .ml-link-field .hint-sub{font-size:12px;color:var(--ink-soft);margin-top:6px;}
   .ml-price-row{display:flex;gap:10px;margin-top:12px;}
   .ml-price-row > div{flex:1;}
@@ -395,7 +400,12 @@
     <p class="field-hint" id="fieldHint">O sistema extrai o ID do produto direto da URL e consulta os dados na Shopee.</p>
 
     <div class="ml-link-field" id="mlManualFields">
-      <label for="mlName">Nome do produto</label>
+      <label for="mlPasteArea">Cole aqui as informações copiadas da página do produto</label>
+      <textarea id="mlPasteArea" placeholder="Selecione o texto da página do produto no Mercado Livre (nome, preço) e cole aqui" rows="4"></textarea>
+      <button class="search-btn" id="mlExtractBtn" type="button" style="margin-top:10px;width:100%;">🔍 Extrair informações</button>
+      <p class="hint-sub">Tento identificar o nome e os preços sozinho — confira os campos abaixo antes de gerar, e ajuste se precisar.</p>
+
+      <label for="mlName" style="margin-top:16px;display:block;">Nome do produto</label>
       <input type="text" id="mlName" placeholder="Ex: Creatina Monohidratada 250g">
       <div class="ml-price-row">
         <div>
@@ -493,6 +503,8 @@
   const mlManualFields = document.getElementById('mlManualFields');
   const mlGenerateBtn = document.getElementById('mlGenerateBtn');
   const mlName = document.getElementById('mlName');
+  const mlPasteArea = document.getElementById('mlPasteArea');
+  const mlExtractBtn = document.getElementById('mlExtractBtn');
   const mlOldPrice = document.getElementById('mlOldPrice');
   const mlNewPrice = document.getElementById('mlNewPrice');
   const searchRow = document.getElementById('searchRow');
@@ -510,20 +522,30 @@
     return val.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
   }
 
-  // Converte texto digitado no formato brasileiro (ex: "129,17") de volta
-  // para número, para permitir edição manual do preço quando a API
-  // trouxer um desconto que não bate com a página real (ex: promoção
-  // agendada que ainda não começou).
+  // Converte texto digitado no formato brasileiro (ex: "129,17" ou
+  // "1.299,00", com ponto de milhar) de volta para número.
   function parseBRL(str){
-    const cleaned = String(str).replace(/[^\d,.-]/g, '').replace(',', '.');
+    let cleaned = String(str).replace(/[^\d,.-]/g, '');
+    // Remove pontos de milhar e troca a vírgula decimal por ponto.
+    cleaned = cleaned.replace(/\./g, '').replace(',', '.');
     const val = parseFloat(cleaned);
     return isNaN(val) ? 0 : val;
   }
 
   function applyPriceEdits(){
     if(!currentProduct) return;
-    currentProduct.oldPrice = parseBRL(oldPriceInput.value);
-    currentProduct.newPrice = parseBRL(newPriceInput.value);
+    const newOld = parseBRL(oldPriceInput.value);
+    const newNew = parseBRL(newPriceInput.value);
+
+    // Só reprocessa (e sorteia um novo modelo) se o valor realmente
+    // mudou — clicar/sair do campo sem editar nada não deve alterar a
+    // mensagem que já está na tela.
+    if(newOld === currentProduct.oldPrice && newNew === currentProduct.newPrice){
+      return;
+    }
+
+    currentProduct.oldPrice = newOld;
+    currentProduct.newPrice = newNew;
     updateDiscountBadge();
     lastIndex = -1;
     refreshAll();
@@ -538,6 +560,97 @@
 
   // Gera a oferta manualmente (Mercado Livre): não busca nada, só monta
   // o "produto" a partir do que a pessoa digitou nos campos.
+  // Tenta identificar nome e preços a partir do texto colado da página
+  // do produto. É uma heurística (o texto colado varia bastante conforme
+  // o navegador), então sempre deixa os campos abertos pra conferência.
+  // Em algumas páginas, o Mercado Livre quebra o preço em vários
+  // pedacinhos por linha (ex: "R$" / "139" / "," / "90", cada um numa
+  // linha separada). Essa função junta esses fragmentos de volta antes
+  // de tentar reconhecer o preço.
+  function mergePriceFragments(lines){
+    const tokenPattern = /^(R\$|\d{1,3}|,|\.)$/;
+    const merged = [];
+    let buffer = '';
+    for(const line of lines){
+      if(tokenPattern.test(line)){
+        buffer += line;
+      } else {
+        if(buffer){ merged.push(buffer); buffer = ''; }
+        merged.push(line);
+      }
+    }
+    if(buffer) merged.push(buffer);
+    return merged;
+  }
+
+  function extractFromPastedText(text){
+    // Normaliza espaços não-quebráveis (comuns em páginas de preço) para
+    // espaço comum, evitando falhas de regex por causa deles.
+    const normalized = text.replace(/\u00A0/g, ' ');
+    const rawLines = normalized.split('\n').map(l => l.trim()).filter(Boolean);
+    const mergedLines = mergePriceFragments(rawLines);
+    const mergedText = mergedLines.join('\n');
+
+    // Remove só o TRECHO da parcela (ex: "6x R$ 9,98 sem juros"), em vez
+    // de descartar a linha inteira — assim, mesmo que o preço de/por
+    // esteja colado na mesma linha da parcela, ele não se perde junto.
+    const withoutInstallments = mergedText.replace(
+      /\d+\s*x\s*R?\$?\s?\d{1,3}(?:\.\d{3})*(?:,\d{2})?(\s*sem\s*juros)?/gi,
+      ' '
+    );
+
+    const priceMatches = [...withoutInstallments.matchAll(/R\$\s?(\d{1,3}(?:\.\d{3})*(?:,\d{2})?)/g)]
+      .map(m => parseBRL(m[1]))
+      .filter(v => v > 0);
+
+    const uniquePrices = [...new Set(priceMatches)].sort((a, b) => b - a);
+
+    let oldPrice = '';
+    let newPrice = '';
+    if(uniquePrices.length >= 2){
+      oldPrice = uniquePrices[0];
+      newPrice = uniquePrices[uniquePrices.length - 1];
+    } else if(uniquePrices.length === 1){
+      newPrice = uniquePrices[0];
+    }
+
+    // Nome: pega a linha mais longa que pareça um título (sem "R$", sem
+    // ser só números, sem palavras comuns de interface do site, sem
+    // links no formato [texto](url)).
+    const noiseWords = /^(compartilhar|favoritar|comprar|adicionar|carrinho|frete|avalia|parcel|vendido|estoque|quantidade|descri|caracter|opini|voltar|entrar|menu|buscar|ver mais|comentário|\[)/i;
+    const installmentLine = /\d+\s*x\b.*sem\s*juros/i;
+    let bestLine = '';
+    for(const line of mergedLines){
+      if(noiseWords.test(line)) continue;
+      if(installmentLine.test(line)) continue;
+      if(/^R\$?\s?[\d.,]+$/.test(line)) continue;
+      if(line.length < 12) continue;
+      if(line.length > bestLine.length) bestLine = line;
+    }
+
+    return { name: bestLine, oldPrice, newPrice };
+  }
+
+  mlExtractBtn.addEventListener('click', () => {
+    const text = mlPasteArea.value.trim();
+    if(!text){
+      errorBox.textContent = 'Cole o texto copiado da página do produto antes de extrair.';
+      errorBox.classList.add('active');
+      return;
+    }
+    errorBox.classList.remove('active');
+
+    const extracted = extractFromPastedText(text);
+    if(extracted.name) mlName.value = extracted.name;
+    if(extracted.oldPrice) mlOldPrice.value = formatBRL(extracted.oldPrice);
+    if(extracted.newPrice) mlNewPrice.value = formatBRL(extracted.newPrice);
+
+    if(!extracted.name && !extracted.newPrice){
+      errorBox.textContent = 'Não consegui identificar nada nesse texto — preencha os campos manualmente.';
+      errorBox.classList.add('active');
+    }
+  });
+
   mlGenerateBtn.addEventListener('click', () => {
     errorBox.classList.remove('active');
 
@@ -621,204 +734,204 @@ ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}👉 ${d.link}`,
+👉 ${d.link}${d.stockSuffix}`,
       d => `😱 ACHADO DO DIA
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}🔗 ${d.link}`,
+🔗 ${d.link}${d.stockSuffix}`,
       d => `⚡ CORRE QUE TÁ VALENDO ⚡
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}👇 Garanta o seu
-${d.link}`,
+👇 Garanta o seu
+${d.link}${d.stockSuffix}`,
       d => `🎯 OFERTA DO DIA
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🚨 ÚLTIMAS UNIDADES 🚨
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}Confira aqui 👉 ${d.link}`,
+Confira aqui 👉 ${d.link}${d.stockSuffix}`,
       d => `💣 BOMBA DE OFERTA 💣
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🛍️ Olha o que eu achei pra vocês:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}Link: ${d.link}`,
+Link: ${d.link}${d.stockSuffix}`,
       d => `✨ SUPER OFERTA ✨
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}🛒 ${d.link}`,
+🛒 ${d.link}${d.stockSuffix}`,
       d => `👀 Vale muito a pena essa aqui:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🔔 ALERTA DE OFERTA 🔔
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}👉 ${d.link}`,
+👉 ${d.link}${d.stockSuffix}`,
       d => `💥 DESCONTO IMPERDÍVEL 💥
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}Corre lá: ${d.link}`,
+Corre lá: ${d.link}${d.stockSuffix}`,
       d => `🏷️ PROMOÇÃO SECRETA 🏷️
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎁 Separei essa pra quem tava esperando:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `📉 PREÇO DESPENCOU 📉
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}👉 ${d.link}`,
+👉 ${d.link}${d.stockSuffix}`,
       d => `🙌 Oferta boa igual essa não teve:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🛒 Bora aproveitar:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🔥 Pra quem tava de olho:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🌟 DESTAQUE DO DIA 🌟
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🚀 Oferta voando baixo:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🤑 Tá barato assim:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `📢 Fica ligado nessa:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `💎 ACHADO IMPERDÍVEL 💎
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🧨 Preço bombou:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🛎️ Chegou a oferta:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `😍 Isso aqui é bom demais:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `⏰ Por tempo limitado:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🔎 Garimpei essa pra vocês:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🥳 Vale a pena conferir:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `📦 Chegou oferta nova:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`
+${d.link}${d.stockSuffix}`
     ]},
     pascoa: { label: 'Páscoa', templates: [
       d => `🐰 OFERTA DE PÁSCOA 🐰
@@ -827,56 +940,56 @@ ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}🥚 ${d.link}`,
+🥚 ${d.link}${d.stockSuffix}`,
       d => `🍫 PÁSCOA COM DESCONTO 🍫
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🐣 Coelhinho trouxe oferta boa:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🥚 OVO DE OFERTA 🥚
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🌸 Páscoa chegando, economia também:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🐰 Aproveite antes que acabe (que nem chocolate na Páscoa):
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🍬 Doce oferta de Páscoa:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🐇 Especial de Páscoa:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`
+${d.link}${d.stockSuffix}`
     ]},
     namorados: { label: 'Dia dos Namorados', templates: [
       d => `❤️ OFERTA DO DIA DOS NAMORADOS ❤️
@@ -885,56 +998,56 @@ ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}💕 ${d.link}`,
+💕 ${d.link}${d.stockSuffix}`,
       d => `💘 Presente pro seu par com desconto:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `💝 Mostra que ama (e economiza):
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `💌 Especial dia dos namorados:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `💞 Surpreenda com essa oferta:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🌹 Ideia de presente romântico:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `💑 Pro casal aproveitar:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `❤️ Últimos dias pra garantir o presente:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`
+${d.link}${d.stockSuffix}`
     ]},
     maes: { label: 'Dia das Mães', templates: [
       d => `🌷 OFERTA DIA DAS MÃES 🌷
@@ -943,70 +1056,70 @@ ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}💐 ${d.link}`,
+💐 ${d.link}${d.stockSuffix}`,
       d => `👩‍👧 Presente pra mãe com desconto:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `💐 Mostra carinho gastando pouco:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🌸 Especial dia das mães:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `💝 Ideia de presente pra mamãe:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `👑 Ela merece (e cabe no bolso):
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🌼 Prepare o presente com antecedência:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `💕 Pro dia mais especial do ano:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎀 Presente com carinho e desconto:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🌺 Últimos dias pra garantir o presente da mãe:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`
+${d.link}${d.stockSuffix}`
     ]},
     natal: { label: 'Natal', templates: [
       d => `🎄 OFERTA DE NATAL 🎄
@@ -1015,56 +1128,56 @@ ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}🎁 ${d.link}`,
+🎁 ${d.link}${d.stockSuffix}`,
       d => `🎅 Papai Noel adiantou o presente:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🔔 SINO DE OFERTA 🔔
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎁 Presente de Natal por esse preço:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `❄️ Natal chegando com desconto:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎄 Ideia de presente + economia:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🌟 Estrela de Natal nessa oferta:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎅 Última chamada antes do Natal:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`
+${d.link}${d.stockSuffix}`
     ]},
     anonovo: { label: 'Ano Novo', templates: [
       d => `🎆 OFERTA DE ANO NOVO 🎆
@@ -1073,56 +1186,56 @@ ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}🥂 ${d.link}`,
+🥂 ${d.link}${d.stockSuffix}`,
       d => `🥂 Começa o ano economizando:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `✨ Virada de ano, preço também virou:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎇 Fecha o ano com essa oferta:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🕛 Contagem regressiva pra economizar:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎊 Ano novo, oferta nova:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🌠 Que o ano comece com economia:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🥳 Réveillon com desconto:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`
+${d.link}${d.stockSuffix}`
     ]},
     voltaaulas: { label: 'Volta às Aulas', templates: [
       d => `🎒 OFERTA VOLTA ÀS AULAS 🎒
@@ -1131,42 +1244,42 @@ ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}📚 ${d.link}`,
+📚 ${d.link}${d.stockSuffix}`,
       d => `✏️ Prepare o material com desconto:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `📚 Ano letivo começando, economia também:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🖍️ Kit escolar por esse preço:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎓 Comece o ano organizado:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `📝 Última chamada pra volta às aulas:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`
+${d.link}${d.stockSuffix}`
     ]},
     carnaval: { label: 'Carnaval', templates: [
       d => `🎉 OFERTA DE CARNAVAL 🎉
@@ -1175,42 +1288,42 @@ ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}🎊 ${d.link}`,
+🎊 ${d.link}${d.stockSuffix}`,
       d => `🥳 Bloco da economia chegou:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎭 Aproveite antes da folia:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🪅 Confete de desconto:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎶 Preço caiu na folia:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎊 Pula Carnaval com essa oferta:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`
+${d.link}${d.stockSuffix}`
     ]},
     consumidor: { label: 'Dia do Consumidor', templates: [
       d => `⚖️ OFERTA DIA DO CONSUMIDOR ⚖️
@@ -1219,42 +1332,42 @@ ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}🛒 ${d.link}`,
+🛒 ${d.link}${d.stockSuffix}`,
       d => `🛍️ Hoje o desconto é seu direito:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `📅 15 de março com preço especial:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎯 Semana do consumidor, oferta boa:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `✅ Desconto pensado em você:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🛒 Comemore com economia:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`
+${d.link}${d.stockSuffix}`
     ]},
     junina: { label: 'Festa Junina', templates: [
       d => `🌽 OFERTA DE FESTA JUNINA 🌽
@@ -1263,42 +1376,42 @@ ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}🔥 ${d.link}`,
+🔥 ${d.link}${d.stockSuffix}`,
       d => `🎪 Arraiá de descontos:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🌾 Preço bom que nem quentão:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎇 Fogueira de ofertas:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🤠 Corre pro arraial de ofertas:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🌽 Quadrilha de desconto:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`
+${d.link}${d.stockSuffix}`
     ]},
     pais: { label: 'Dia dos Pais', templates: [
       d => `👔 OFERTA DIA DOS PAIS 👔
@@ -1307,42 +1420,42 @@ ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}🎁 ${d.link}`,
+🎁 ${d.link}${d.stockSuffix}`,
       d => `👨‍👧 Presente pro pai com desconto:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🛠️ Mostra que lembrou dele:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎯 Especial dia dos pais:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `💼 Ideia de presente pro pai:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🏆 Ele merece esse presente:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`
+${d.link}${d.stockSuffix}`
     ]},
     independencia: { label: 'Independência', templates: [
       d => `🇧🇷 OFERTA DA INDEPENDÊNCIA 🇧🇷
@@ -1351,35 +1464,35 @@ ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}🎆 ${d.link}`,
+🎆 ${d.link}${d.stockSuffix}`,
       d => `💚💛 Sete de setembro com desconto:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎉 Liberte seu bolso desse preço:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🇧🇷 Independência é economizar:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎊 Feriado com oferta especial:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`
+${d.link}${d.stockSuffix}`
     ]},
     cliente: { label: 'Dia do Cliente', templates: [
       d => `🤝 OFERTA DIA DO CLIENTE 🤝
@@ -1388,42 +1501,42 @@ ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}💛 ${d.link}`,
+💛 ${d.link}${d.stockSuffix}`,
       d => `🙌 Hoje o desconto é por você:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `❤️ Obrigado por confiar na gente:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎁 Presente especial de cliente:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🌟 Você merece esse preço:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🤝 15 de setembro com oferta:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`
+${d.link}${d.stockSuffix}`
     ]},
     criancas: { label: 'Dia das Crianças', templates: [
       d => `🧸 OFERTA DIA DAS CRIANÇAS 🧸
@@ -1432,42 +1545,42 @@ ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}🎈 ${d.link}`,
+🎈 ${d.link}${d.stockSuffix}`,
       d => `🎁 Presente pra criançada com desconto:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🧒 Alegra a criançada gastando pouco:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎠 Especial dia das crianças:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🪀 Ideia de presente pros pequenos:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎈 Sorriso garantido com esse preço:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`
+${d.link}${d.stockSuffix}`
     ]},
     halloween: { label: 'Halloween', templates: [
       d => `🎃 OFERTA DE HALLOWEEN 🎃
@@ -1476,42 +1589,42 @@ ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}👻 ${d.link}`,
+👻 ${d.link}${d.stockSuffix}`,
       d => `👻 Preço assustadoramente bom:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🕸️ Doçura ou desconto? As duas:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🦇 Oferta que dá medo de perder:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🎃 Especial Halloween:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🍬 Trick or treat, o desconto é seu:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`
+${d.link}${d.stockSuffix}`
     ]},
     blackfriday: { label: 'Black Friday', templates: [
       d => `🖤 BLACK FRIDAY 🖤
@@ -1520,42 +1633,42 @@ ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}⚡ ${d.link}`,
+⚡ ${d.link}${d.stockSuffix}`,
       d => `🔥 MAIOR DESCONTO DO ANO 🔥
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `⏳ Só até acabar o estoque:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `💣 PREÇO EXPLODIU (pra baixo):
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🏃 Corre que é Black Friday:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`,
+${d.link}${d.stockSuffix}`,
       d => `🖤 Esse desconto some rápido:
 
 ${d.name}
 
 ${d.priceBlock}
 
-${d.stock}${d.link}`
+${d.link}${d.stockSuffix}`
     ]}
   };
 
@@ -1577,7 +1690,8 @@ ${d.stock}${d.link}`
       new: newFormatted,
       priceBlock,
       link: linkInput.value.trim(),
-      stock: stockNote.checked ? '⚠️ Preço pode variar conforme o estoque do fornecedor.\n\n' : ''
+      // Aviso de estoque agora vem DEPOIS do link, no final da mensagem.
+      stockSuffix: stockNote.checked ? '\n\n⚠️ Preço pode variar conforme o estoque do fornecedor.' : ''
     };
   }
 
