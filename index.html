@@ -349,6 +349,49 @@
   }
   .variant-copy:hover{background:var(--navy-dark);}
   .variant-copy.copied{background:var(--savings);}
+
+  /* ---------- abas: gerar pelo link / caçar ofertas ---------- */
+  .mode-tabs{
+    display:flex;gap:6px;padding:5px;background:var(--paper-raised);
+    border:1px solid var(--line);border-radius:14px;margin-bottom:4px;
+  }
+  .mode-tab{
+    flex:1;font-family:'Inter',sans-serif;font-weight:700;font-size:14.5px;
+    padding:11px 14px;border:none;border-radius:10px;background:none;
+    color:var(--ink-soft);cursor:pointer;
+  }
+  .mode-tab:hover{color:var(--navy);}
+  .mode-tab.active{background:var(--navy);color:#fff;box-shadow:0 3px 10px rgba(2,29,84,0.25);}
+  .hunt-filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
+  .hunt-filters label{font-size:13px;font-weight:600;color:var(--ink);display:block;margin-bottom:6px;}
+  .hunt-filters select, .hunt-filters input{
+    width:100%;font-family:'Inter',sans-serif;font-size:14px;padding:11px 12px;
+    border:1.5px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);
+  }
+  .hunt-results{display:none;margin-top:24px;}
+  .hunt-results.active{display:block;animation:fadeUp 0.4s ease both;}
+  .hunt-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+  .hunt-count{font-family:'Space Mono',monospace;font-size:13px;color:var(--ink-soft);}
+  .hunt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media (max-width:600px){.hunt-grid{grid-template-columns:1fr;}}
+  .hunt-card{
+    background:var(--paper-raised);border:1.5px solid var(--line);border-radius:14px;
+    padding:12px;display:grid;grid-template-columns:84px 1fr;gap:12px;
+    box-shadow:0 1px 4px rgba(10,27,61,0.05);
+  }
+  .hunt-card.checked{border-color:var(--accent);background:var(--accent-soft);}
+  .hunt-card img{width:84px;height:84px;border-radius:10px;object-fit:cover;background:var(--paper);border:1px solid var(--line);}
+  .hunt-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14.5px;line-height:1.3;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .hunt-price{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;margin-top:5px;}
+  .hunt-price .old-price{font-size:12px;}
+  .hunt-price .new-price{font-size:18px;}
+  .hunt-meta{font-size:12px;color:var(--ink-soft);margin-top:5px;line-height:1.45;}
+  .hunt-meta b{color:var(--savings);white-space:nowrap;}
+  .hunt-actions{grid-column:1 / -1;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+  .hunt-actions .btn-solid, .hunt-actions .btn-ghost{font-size:12.5px;padding:8px 12px;}
+  .hunt-pick{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--ink);cursor:pointer;margin-left:auto;}
+  .hunt-pick input{width:16px;height:16px;accent-color:var(--accent);}
 </style>
 </head>
 <body>
@@ -366,10 +409,17 @@
     <div class="demo-flag" id="connFlag" style="background:#E4F3EB;color:#0C7A4B;border-color:#B7E0C7;">✅ Conectado à API oficial da Shopee — dados reais</div>
   </header>
 
-  <div class="section-label">Plataforma</div>
-  <div class="platform-row" id="platformRow">
-    <button type="button" class="platform-chip active" data-platform="shopee">🛍️ Shopee</button>
-    <button type="button" class="platform-chip" data-platform="ml">📦 Mercado Livre</button>
+  <div class="mode-tabs" id="modeTabs" role="tablist">
+    <button type="button" class="mode-tab active" data-mode="link" role="tab" aria-selected="true">🔗 Gerar pelo link</button>
+    <button type="button" class="mode-tab" data-mode="hunt" role="tab" aria-selected="false">🔎 Caçar ofertas</button>
+  </div>
+
+  <div class="mode-link">
+    <div class="section-label">Plataforma</div>
+    <div class="platform-row" id="platformRow">
+      <button type="button" class="platform-chip active" data-platform="shopee">🛍️ Shopee</button>
+      <button type="button" class="platform-chip" data-platform="ml">📦 Mercado Livre</button>
+    </div>
   </div>
 
   <div class="section-label">Data comemorativa</div>
@@ -392,6 +442,7 @@
     <button type="button" class="category-chip" data-cat="natal">🎄 Natal</button>
   </div>
 
+  <div class="mode-link">
   <div class="search-panel">
     <div class="search-row" id="searchRow">
       <input type="url" id="link" placeholder="Cole aqui o link do produto na Shopee">
@@ -472,6 +523,45 @@
     <button class="toggle-all" id="toggleAll">Ver todos os modelos desta categoria ▾</button>
     <div class="all-variants" id="allVariants">
       <div class="variants-grid" id="variantsGrid"></div>
+    </div>
+  </div>
+  </div>
+
+  <div class="mode-hunt" id="modeHunt" hidden>
+    <div class="search-panel">
+      <div class="search-row">
+        <input type="text" id="huntQuery" placeholder="O que você quer caçar? Ex: organizador, fone bluetooth">
+        <button class="search-btn" id="huntBtn" type="button">Caçar ofertas</button>
+      </div>
+      <div class="hunt-filters">
+        <div>
+          <label for="huntOrder">Ordenar por</label>
+          <select id="huntOrder">
+            <option value="vendidos">Mais vendidos</option>
+            <option value="comissao">Maior comissão</option>
+            <option value="menor_preco">Menor preço</option>
+            <option value="relevancia">Mais relevantes</option>
+          </select>
+        </div>
+        <div>
+          <label for="huntMax">Preço máximo (R$)</label>
+          <input type="text" id="huntMax" inputmode="decimal" placeholder="Ex: 30">
+        </div>
+      </div>
+      <p class="field-hint">Só aparecem produtos com nota 4,5 ou mais e pelo menos 100 vendas. A mensagem usa a data comemorativa escolhida acima.</p>
+      <div class="status" id="huntStatus">
+        <div class="spinner"></div>
+        <span>Caçando ofertas na Shopee...</span>
+      </div>
+      <div class="error-box" id="huntError"></div>
+    </div>
+
+    <div class="hunt-results" id="huntResults">
+      <div class="hunt-head">
+        <span class="hunt-count" id="huntCount"></span>
+        <button class="btn-solid" id="huntCopyLinks" type="button">Copiar links marcados (para o carrossel)</button>
+      </div>
+      <div class="hunt-grid" id="huntGrid"></div>
     </div>
   </div>
 </div>
@@ -1674,6 +1764,12 @@ ${d.link}${d.stockSuffix}`
 
   function currentData(){
     const { name, oldPrice, newPrice } = currentProduct;
+    return messageData(name, oldPrice, newPrice, linkInput.value.trim());
+  }
+
+  // Monta os dados que os modelos de mensagem usam. Serve tanto para o
+  // produto buscado pelo link quanto para as ofertas do caçador.
+  function messageData(name, oldPrice, newPrice, link){
     const discountPct = oldPrice > newPrice ? Math.round((1 - newPrice/oldPrice) * 100) : null;
     const oldFormatted = formatBRL(oldPrice);
     const newFormatted = formatBRL(newPrice);
@@ -1689,7 +1785,7 @@ ${d.link}${d.stockSuffix}`
       old: oldFormatted,
       new: newFormatted,
       priceBlock,
-      link: linkInput.value.trim(),
+      link,
       // Aviso de estoque agora vem DEPOIS do link, no final da mensagem.
       stockSuffix: stockNote.checked ? '\n\n⚠️ Preço pode variar conforme o estoque do fornecedor.' : ''
     };
@@ -1899,6 +1995,182 @@ ${d.link}${d.stockSuffix}`
     }
   });
 
+  // ---------- Caçador de ofertas ----------
+  // Pesquisa produtos por palavra-chave no backend (/api/search), que já
+  // devolve só ofertas com nota e vendas boas e com o link de afiliado.
+  const BACKEND_URL_SEARCH = 'https://tudoshop-backend.vercel.app/api/search';
+
+  const modeTabs = document.getElementById('modeTabs');
+  const modeHunt = document.getElementById('modeHunt');
+  const huntQuery = document.getElementById('huntQuery');
+  const huntBtn = document.getElementById('huntBtn');
+  const huntOrder = document.getElementById('huntOrder');
+  const huntMax = document.getElementById('huntMax');
+  const huntStatus = document.getElementById('huntStatus');
+  const huntError = document.getElementById('huntError');
+  const huntResults = document.getElementById('huntResults');
+  const huntCount = document.getElementById('huntCount');
+  const huntGrid = document.getElementById('huntGrid');
+  const huntCopyLinks = document.getElementById('huntCopyLinks');
+
+  let huntOffers = [];
+
+  function setMode(mode){
+    [...modeTabs.children].forEach(t => {
+      const on = t.dataset.mode === mode;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    document.querySelectorAll('.mode-link').forEach(el => { el.hidden = mode !== 'link'; });
+    modeHunt.hidden = mode !== 'hunt';
+  }
+
+  modeTabs.addEventListener('click', (e) => {
+    const tab = e.target.closest('.mode-tab');
+    if(tab) setMode(tab.dataset.mode);
+  });
+
+  // Link do produto num formato que o extractIds do backend entende.
+  function productUrl(offer){
+    return `https://shopee.com.br/product/${offer.shopId}/${offer.itemId}`;
+  }
+
+  // Mostra um retorno rápido no botão ("Copiado ✓") e volta ao texto original.
+  function flashButton(btn, text, original, ms){
+    btn.textContent = text;
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, ms || 1500);
+  }
+
+  function renderHunt(){
+    huntGrid.innerHTML = '';
+    huntCount.textContent = huntOffers.length === 1 ? '1 oferta encontrada' : `${huntOffers.length} ofertas encontradas`;
+
+    huntOffers.forEach((offer, i) => {
+      const card = document.createElement('div');
+      card.className = 'hunt-card';
+      card.innerHTML = `
+        <img alt="">
+        <div>
+          <div class="hunt-name"></div>
+          <div class="hunt-price"></div>
+          <div class="hunt-meta"></div>
+        </div>
+        <div class="hunt-actions">
+          <button class="btn-solid" type="button" data-act="copy">Copiar mensagem</button>
+          <button class="btn-ghost" type="button" data-act="open">Abrir no gerador</button>
+          <label class="hunt-pick"><input type="checkbox" data-act="pick"> Carrossel</label>
+        </div>`;
+      card.querySelector('img').src = offer.image;
+      card.querySelector('img').alt = offer.name;
+      card.querySelector('.hunt-name').textContent = offer.name;
+
+      const price = card.querySelector('.hunt-price');
+      if(offer.oldPrice > offer.newPrice){
+        const old = document.createElement('span');
+        old.className = 'old-price';
+        old.textContent = `R$ ${formatBRL(offer.oldPrice)}`;
+        price.appendChild(old);
+      }
+      const now = document.createElement('span');
+      now.className = 'new-price';
+      now.textContent = `R$ ${formatBRL(offer.newPrice)}`;
+      price.appendChild(now);
+      if(offer.discount){
+        const badge = document.createElement('span');
+        badge.className = 'discount-badge';
+        badge.textContent = `-${offer.discount}%`;
+        price.appendChild(badge);
+      }
+
+      const meta = card.querySelector('.hunt-meta');
+      meta.textContent = `${offer.sales.toLocaleString('pt-BR')} vendidos · nota ${String(offer.rating).replace('.', ',')} · `;
+      const earn = document.createElement('b');
+      earn.textContent = `você ganha R$ ${formatBRL(offer.commission)}`;
+      meta.appendChild(earn);
+
+      card.querySelector('[data-act="copy"]').addEventListener('click', (e) => {
+        const bank = CATS[currentCategory].templates;
+        const fn = bank[Math.floor(Math.random() * bank.length)];
+        const msg = fn(messageData(offer.name, offer.oldPrice, offer.newPrice, offer.affiliateLink)).trim();
+        copyToClipboard(msg)
+          .then(() => flashButton(e.currentTarget, 'Copiado ✓', 'Copiar mensagem'))
+          .catch(() => flashButton(e.currentTarget, 'Não deu pra copiar', 'Copiar mensagem', 2000));
+      });
+
+      card.querySelector('[data-act="open"]').addEventListener('click', () => {
+        // Leva a oferta para a aba do link, que já gera todas as variações.
+        if(currentPlatform !== 'shopee') platformRow.querySelector('[data-platform="shopee"]').click();
+        setMode('link');
+        linkInput.value = productUrl(offer);
+        searchBtn.click();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      card.querySelector('[data-act="pick"]').addEventListener('change', (e) => {
+        huntOffers[i].picked = e.target.checked;
+        card.classList.toggle('checked', e.target.checked);
+      });
+
+      huntGrid.appendChild(card);
+    });
+
+    huntResults.classList.add('active');
+  }
+
+  huntBtn.addEventListener('click', async () => {
+    const q = huntQuery.value.trim();
+    huntError.classList.remove('active');
+    huntResults.classList.remove('active');
+
+    if(!q){
+      huntError.textContent = 'Escreva o que você quer caçar (ex: organizador, fone bluetooth).';
+      huntError.classList.add('active');
+      return;
+    }
+
+    const params = new URLSearchParams({ q, ordem: huntOrder.value });
+    const max = parseBRL(huntMax.value);
+    if(max) params.set('max', String(max));
+
+    huntBtn.disabled = true;
+    huntStatus.classList.add('active');
+
+    try{
+      const response = await fetch(`${BACKEND_URL_SEARCH}?${params}`);
+      const data = await response.json();
+      if(!response.ok || data.error) throw new Error(data.error || 'Não foi possível caçar ofertas agora.');
+
+      huntOffers = data.offers || [];
+      if(!huntOffers.length){
+        huntError.textContent = 'Nenhuma oferta boa apareceu. Tente outra palavra, outra ordem ou um preço máximo maior.';
+        huntError.classList.add('active');
+        return;
+      }
+      renderHunt();
+    } catch(err){
+      huntError.textContent = err.message || 'Não foi possível caçar ofertas agora.';
+      huntError.classList.add('active');
+    } finally {
+      huntBtn.disabled = false;
+      huntStatus.classList.remove('active');
+    }
+  });
+
+  // Copia os links marcados no formato que o Claude usa para montar os
+  // carrosséis. O ID do app da Shopee continua sendo preenchido à mão.
+  huntCopyLinks.addEventListener('click', () => {
+    const picked = huntOffers.filter(o => o.picked);
+    if(!picked.length){
+      flashButton(huntCopyLinks, 'Marque "Carrossel" em algum produto', 'Copiar links marcados (para o carrossel)', 2200);
+      return;
+    }
+    const text = picked.map((o, i) => `${i + 1}. ${productUrl(o)} | ID: `).join('\n');
+    copyToClipboard(text)
+      .then(() => flashButton(huntCopyLinks, `${picked.length} link(s) copiado(s) ✓`, 'Copiar links marcados (para o carrossel)'))
+      .catch(() => flashButton(huntCopyLinks, 'Não deu pra copiar', 'Copiar links marcados (para o carrossel)', 2000));
+  });
+
   // Aperta Enter em qualquer um desses campos e já dispara a busca/geração,
   // sem precisar clicar no botão.
   function triggerOnEnter(inputEl, buttonEl){
@@ -1915,6 +2187,8 @@ ${d.link}${d.stockSuffix}`
   triggerOnEnter(mlOldPrice, mlGenerateBtn);
   triggerOnEnter(mlNewPrice, mlGenerateBtn);
   triggerOnEnter(mlAffiliateLink, mlGenerateBtn);
+  triggerOnEnter(huntQuery, huntBtn);
+  triggerOnEnter(huntMax, huntBtn);
 </script>
 </body>
 </html>
