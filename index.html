@@ -392,6 +392,13 @@
   .hunt-actions .btn-solid, .hunt-actions .btn-ghost{font-size:12.5px;padding:8px 12px;}
   .hunt-pick{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--ink);cursor:pointer;margin-left:auto;}
   .hunt-pick input{width:16px;height:16px;accent-color:var(--accent);}
+  .hunt-links{display:none;margin-bottom:14px;}
+  .hunt-links.active{display:block;animation:fadeUp 0.3s ease both;}
+  .hunt-links label{font-size:13px;font-weight:600;color:var(--ink);display:block;margin-bottom:6px;}
+  .hunt-links textarea{
+    width:100%;font-family:'Space Mono',monospace;font-size:12.5px;line-height:1.6;padding:12px 14px;
+    border:1.5px solid var(--accent);border-radius:10px;background:var(--paper-raised);color:var(--ink);resize:vertical;
+  }
 </style>
 </head>
 <body>
@@ -560,6 +567,10 @@
       <div class="hunt-head">
         <span class="hunt-count" id="huntCount"></span>
         <button class="btn-solid" id="huntCopyLinks" type="button">Copiar links marcados (para o carrossel)</button>
+      </div>
+      <div class="hunt-links" id="huntLinks">
+        <label for="huntLinksText">Links marcados (se o Ctrl + V não funcionar, selecione e copie daqui)</label>
+        <textarea id="huntLinksText" rows="4" readonly></textarea>
       </div>
       <div class="hunt-grid" id="huntGrid"></div>
     </div>
@@ -2012,6 +2023,8 @@ ${d.link}${d.stockSuffix}`
   const huntCount = document.getElementById('huntCount');
   const huntGrid = document.getElementById('huntGrid');
   const huntCopyLinks = document.getElementById('huntCopyLinks');
+  const huntLinks = document.getElementById('huntLinks');
+  const huntLinksText = document.getElementById('huntLinksText');
 
   let huntOffers = [];
 
@@ -2044,6 +2057,7 @@ ${d.link}${d.stockSuffix}`
 
   function renderHunt(){
     huntGrid.innerHTML = '';
+    huntLinks.classList.remove('active');
     huntCount.textContent = huntOffers.length === 1 ? '1 oferta encontrada' : `${huntOffers.length} ofertas encontradas`;
 
     huntOffers.forEach((offer, i) => {
@@ -2166,6 +2180,12 @@ ${d.link}${d.stockSuffix}`
       return;
     }
     const text = picked.map((o, i) => `${i + 1}. ${productUrl(o)} | ID: `).join('\n');
+    // Também mostra os links na tela: em alguns navegadores (ou janelas
+    // dentro de outros apps) a cópia automática não chega ao Ctrl + V.
+    huntLinksText.value = text;
+    huntLinksText.rows = Math.max(3, picked.length + 1);
+    huntLinks.classList.add('active');
+    huntLinksText.select();
     copyToClipboard(text)
       .then(() => flashButton(huntCopyLinks, `${picked.length} link(s) copiado(s) ✓`, 'Copiar links marcados (para o carrossel)'))
       .catch(() => flashButton(huntCopyLinks, 'Não deu pra copiar', 'Copiar links marcados (para o carrossel)', 2000));
