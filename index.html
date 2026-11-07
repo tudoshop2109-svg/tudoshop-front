@@ -207,7 +207,7 @@
   }
   .search-row input:focus, button:focus-visible{outline:2px solid var(--accent);outline-offset:1px;}
   .search-btn{
-    font-family:'Inter',sans-serif;font-weight:700;font-size:14.5px;padding:0 22px;
+    font-family:'Inter',sans-serif;font-weight:700;font-size:14.5px;padding:0 22px;min-height:46px;
     background:var(--navy);color:#fff;border:none;border-radius:10px;cursor:pointer;white-space:nowrap;
     box-shadow:0 3px 10px rgba(2,29,84,0.25);
   }
@@ -392,6 +392,31 @@
   .hunt-actions .btn-solid, .hunt-actions .btn-ghost{font-size:12.5px;padding:8px 12px;}
   .hunt-pick{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--ink);cursor:pointer;margin-left:auto;}
   .hunt-pick input{width:16px;height:16px;accent-color:var(--accent);}
+  .trend-panel{
+    background:var(--paper-raised);border:1px solid var(--line);border-radius:16px;
+    padding:20px 22px 22px;margin-top:16px;box-shadow:0 2px 12px rgba(10,27,61,0.06);
+  }
+  .trend-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .trend-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;color:var(--navy);margin:0;}
+  .trend-note{font-size:12.5px;color:var(--ink-soft);margin:4px 0 0;max-width:52ch;line-height:1.45;}
+  .trend-period{display:flex;gap:4px;padding:4px;background:var(--paper);border-radius:11px;}
+  .trend-period button{
+    font-family:'Inter',sans-serif;font-weight:700;font-size:13px;padding:8px 14px;
+    border:none;border-radius:8px;background:none;color:var(--ink-soft);cursor:pointer;
+  }
+  .trend-period button.active{background:var(--navy);color:#fff;}
+  .trend-segs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0;}
+  .trend-segs button{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:13px;padding:7px 14px;border-radius:20px;
+    border:1px solid var(--line);background:var(--paper-raised);color:var(--ink-soft);cursor:pointer;
+  }
+  .trend-segs button.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .trend-rank{
+    font-family:'Space Mono',monospace;font-weight:700;font-size:12px;color:var(--accent-dark);margin-right:4px;
+  }
+  .trend-up{color:var(--savings);font-weight:700;}
+  .picks-bar{margin-top:14px;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+  .picks-bar .hunt-links{align-self:stretch;}
   .hunt-links{display:none;margin-bottom:14px;}
   .hunt-links.active{display:block;animation:fadeUp 0.3s ease both;}
   .hunt-links label{font-size:13px;font-weight:600;color:var(--ink);display:block;margin-bottom:6px;}
@@ -563,16 +588,34 @@
       <div class="error-box" id="huntError"></div>
     </div>
 
-    <div class="hunt-results" id="huntResults">
-      <div class="hunt-head">
-        <span class="hunt-count" id="huntCount"></span>
-        <button class="btn-solid" id="huntCopyLinks" type="button">Copiar links marcados (para o carrossel)</button>
-      </div>
+    <div class="picks-bar">
+      <button class="btn-solid" id="huntCopyLinks" type="button">Copiar links marcados para o carrossel (0)</button>
       <div class="hunt-links" id="huntLinks">
         <label for="huntLinksText">Links marcados (se o Ctrl + V não funcionar, selecione e copie daqui)</label>
         <textarea id="huntLinksText" rows="4" readonly></textarea>
       </div>
+    </div>
+
+    <div class="hunt-results" id="huntResults">
+      <div class="hunt-head">
+        <span class="hunt-count" id="huntCount"></span>
+      </div>
       <div class="hunt-grid" id="huntGrid"></div>
+    </div>
+
+    <div class="trend-panel" id="trendPanel">
+      <div class="trend-head">
+        <div>
+          <h2 class="trend-title">📈 Em alta</h2>
+          <p class="trend-note" id="trendNote">Carregando os mais vendidos...</p>
+        </div>
+        <div class="trend-period" id="trendPeriod" role="tablist">
+          <button type="button" class="active" data-period="semana" role="tab" aria-selected="true">Semana</button>
+          <button type="button" data-period="mes" role="tab" aria-selected="false">Mês</button>
+        </div>
+      </div>
+      <div class="trend-segs" id="trendSegs"></div>
+      <div class="hunt-grid" id="trendGrid"></div>
     </div>
   </div>
 </div>
@@ -2027,6 +2070,12 @@ ${d.link}${d.stockSuffix}`
   const huntLinksText = document.getElementById('huntLinksText');
 
   let huntOffers = [];
+  // Produtos marcados para o carrossel (da busca ou dos painéis "Em alta").
+  const pickedOffers = new Map();
+
+  function pickLabel(){
+    return `Copiar links marcados para o carrossel (${pickedOffers.size})`;
+  }
 
   function setMode(mode){
     [...modeTabs.children].forEach(t => {
@@ -2036,6 +2085,7 @@ ${d.link}${d.stockSuffix}`
     });
     document.querySelectorAll('.mode-link').forEach(el => { el.hidden = mode !== 'link'; });
     modeHunt.hidden = mode !== 'hunt';
+    if(mode === 'hunt') loadTrends();
   }
 
   modeTabs.addEventListener('click', (e) => {
@@ -2055,12 +2105,10 @@ ${d.link}${d.stockSuffix}`
     setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, ms || 1500);
   }
 
-  function renderHunt(){
-    huntGrid.innerHTML = '';
-    huntLinks.classList.remove('active');
-    huntCount.textContent = huntOffers.length === 1 ? '1 oferta encontrada' : `${huntOffers.length} ofertas encontradas`;
-
-    huntOffers.forEach((offer, i) => {
+  // Card de um produto, usado nos resultados da busca e nos painéis "Em alta".
+  // `metaPrefix` é o começo da linha de números (vendas, nota...);
+  // `highlight` pinta esse começo de verde (vendas subindo).
+  function offerCard(offer, metaPrefix, highlight){
       const card = document.createElement('div');
       card.className = 'hunt-card';
       card.innerHTML = `
@@ -2098,18 +2146,22 @@ ${d.link}${d.stockSuffix}`
       }
 
       const meta = card.querySelector('.hunt-meta');
-      meta.textContent = `${offer.sales.toLocaleString('pt-BR')} vendidos · nota ${String(offer.rating).replace('.', ',')} · `;
+      const prefix = document.createElement('span');
+      prefix.textContent = metaPrefix;
+      if(highlight) prefix.className = 'trend-up';
+      meta.append(prefix, ` · nota ${String(offer.rating).replace('.', ',')} · `);
       const earn = document.createElement('b');
       earn.textContent = `você ganha R$ ${formatBRL(offer.commission)}`;
       meta.appendChild(earn);
 
-      card.querySelector('[data-act="copy"]').addEventListener('click', (e) => {
+      const copyBtn = card.querySelector('[data-act="copy"]');
+      copyBtn.addEventListener('click', () => {
         const bank = CATS[currentCategory].templates;
         const fn = bank[Math.floor(Math.random() * bank.length)];
         const msg = fn(messageData(offer.name, offer.oldPrice, offer.newPrice, offer.affiliateLink)).trim();
         copyToClipboard(msg)
-          .then(() => flashButton(e.currentTarget, 'Copiado ✓', 'Copiar mensagem'))
-          .catch(() => flashButton(e.currentTarget, 'Não deu pra copiar', 'Copiar mensagem', 2000));
+          .then(() => flashButton(copyBtn, 'Copiado ✓', 'Copiar mensagem'))
+          .catch(() => flashButton(copyBtn, 'Não deu pra copiar', 'Copiar mensagem', 2000));
       });
 
       card.querySelector('[data-act="open"]').addEventListener('click', () => {
@@ -2121,14 +2173,116 @@ ${d.link}${d.stockSuffix}`
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
-      card.querySelector('[data-act="pick"]').addEventListener('change', (e) => {
-        huntOffers[i].picked = e.target.checked;
-        card.classList.toggle('checked', e.target.checked);
+      const pick = card.querySelector('[data-act="pick"]');
+      pick.checked = pickedOffers.has(offer.itemId);
+      card.classList.toggle('checked', pick.checked);
+      pick.addEventListener('change', () => {
+        if(pick.checked) pickedOffers.set(offer.itemId, offer);
+        else pickedOffers.delete(offer.itemId);
+        huntCopyLinks.textContent = pickLabel();
+        // O mesmo produto pode estar na busca e no painel "Em alta" ao mesmo tempo.
+        document.querySelectorAll(`[data-item="${offer.itemId}"]`).forEach(c => {
+          c.classList.toggle('checked', pick.checked);
+          c.querySelector('[data-act="pick"]').checked = pick.checked;
+        });
       });
 
-      huntGrid.appendChild(card);
+      card.dataset.item = offer.itemId;
+      return card;
+  }
+
+  // ---------- Painéis "Em alta" ----------
+  // dados/tendencias.json é gerado todo dia pelo GitHub Actions
+  // (scripts/coletar_tendencias.py). A Shopee só dá o total de vendas, então
+  // "vendasPeriodo" é a diferença entre hoje e 7/30 dias atrás.
+  const trendNote = document.getElementById('trendNote');
+  const trendPeriod = document.getElementById('trendPeriod');
+  const trendSegs = document.getElementById('trendSegs');
+  const trendGrid = document.getElementById('trendGrid');
+
+  let trends = null;
+  let trendsRequested = false;
+  let trendPeriodKey = 'semana';
+  let trendSeg = 'geral';
+
+  function dateBR(iso){
+    const [y, m, d] = iso.split('-');
+    return `${d}/${m}`;
+  }
+
+  async function loadTrends(){
+    if(trendsRequested) return;
+    trendsRequested = true;
+    try{
+      const response = await fetch(`dados/tendencias.json?v=${Date.now()}`, { cache: 'no-store' });
+      if(!response.ok) throw new Error('sem dados');
+      trends = await response.json();
+      renderTrends();
+    } catch(err){
+      trendNote.textContent = 'Os rankings aparecem depois da primeira coleta diária (todo dia às 8h).';
+    }
+  }
+
+  function renderTrends(){
+    const period = trends[trendPeriodKey];
+    const total = trendPeriodKey === 'semana' ? 7 : 30;
+    const label = trendPeriodKey === 'semana' ? 'na semana' : 'no mês';
+
+    [...trendPeriod.children].forEach(b => {
+      const on = b.dataset.period === trendPeriodKey;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
     });
 
+    // Só mostra os segmentos que têm produtos (o "Geral" pode faltar se a lista falhar).
+    const segIds = Object.keys(trends.nomes).filter(s => (period.segmentos[s] || []).length);
+    if(!segIds.includes(trendSeg)) trendSeg = segIds[0];
+    trendSegs.innerHTML = '';
+    segIds.forEach(s => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = trends.nomes[s];
+      b.classList.toggle('active', s === trendSeg);
+      b.addEventListener('click', () => { trendSeg = s; renderTrends(); });
+      trendSegs.appendChild(b);
+    });
+
+    if(period.completo){
+      trendNote.textContent = `Quem mais vendeu nos últimos ${total} dias (desde ${dateBR(period.desde)}).`;
+    } else if(period.desde){
+      trendNote.textContent = `Medindo a tendência: ${period.diasMedidos} de ${total} dias. Por enquanto, vendas desde ${dateBR(period.desde)}.`;
+    } else {
+      trendNote.textContent = `Medindo a tendência: dia 1 de ${total}. Por enquanto, os mais vendidos no total; a partir de amanhã aparecem as vendas do período.`;
+    }
+
+    trendGrid.innerHTML = '';
+    (period.segmentos[trendSeg] || []).forEach((offer, i) => {
+      const prefix = offer.vendasPeriodo === null
+        ? `${offer.sales.toLocaleString('pt-BR')} vendidos no total`
+        : `+${offer.vendasPeriodo.toLocaleString('pt-BR')} vendas ${period.completo ? label : 'no período'}`;
+      const card = offerCard(offer, prefix, offer.vendasPeriodo !== null);
+      const rank = document.createElement('span');
+      rank.className = 'trend-rank';
+      rank.textContent = `${i + 1}º`;
+      card.querySelector('.hunt-name').prepend(rank);
+      trendGrid.appendChild(card);
+    });
+  }
+
+  trendPeriod.addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if(!b || !trends) return;
+    trendPeriodKey = b.dataset.period;
+    renderTrends();
+  });
+
+  function renderHunt(){
+    huntGrid.innerHTML = '';
+    huntLinks.classList.remove('active');
+    huntCount.textContent = huntOffers.length === 1 ? '1 oferta encontrada' : `${huntOffers.length} ofertas encontradas`;
+    huntOffers.forEach(offer => {
+      huntGrid.appendChild(offerCard(offer, `${offer.sales.toLocaleString('pt-BR')} vendidos`));
+    });
     huntResults.classList.add('active');
   }
 
@@ -2174,9 +2328,9 @@ ${d.link}${d.stockSuffix}`
   // Copia os links marcados no formato que o Claude usa para montar os
   // carrosséis. O ID do app da Shopee continua sendo preenchido à mão.
   huntCopyLinks.addEventListener('click', () => {
-    const picked = huntOffers.filter(o => o.picked);
+    const picked = [...pickedOffers.values()];
     if(!picked.length){
-      flashButton(huntCopyLinks, 'Marque "Carrossel" em algum produto', 'Copiar links marcados (para o carrossel)', 2200);
+      flashButton(huntCopyLinks, 'Marque "Carrossel" em algum produto', pickLabel(), 2200);
       return;
     }
     const text = picked.map((o, i) => `${i + 1}. ${productUrl(o)} | ID: `).join('\n');
@@ -2187,8 +2341,8 @@ ${d.link}${d.stockSuffix}`
     huntLinks.classList.add('active');
     huntLinksText.select();
     copyToClipboard(text)
-      .then(() => flashButton(huntCopyLinks, `${picked.length} link(s) copiado(s) ✓`, 'Copiar links marcados (para o carrossel)'))
-      .catch(() => flashButton(huntCopyLinks, 'Não deu pra copiar', 'Copiar links marcados (para o carrossel)', 2000));
+      .then(() => flashButton(huntCopyLinks, `${picked.length} link(s) copiado(s) ✓`, pickLabel()))
+      .catch(() => flashButton(huntCopyLinks, 'Não deu pra copiar', pickLabel(), 2000));
   });
 
   // Aperta Enter em qualquer um desses campos e já dispara a busca/geração,
