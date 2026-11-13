@@ -1,6 +1,6 @@
 {
- "atualizado": "2026-11-12T15:39-03:00",
- "diasColetados": 6,
+ "atualizado": "2026-11-13T15:18-03:00",
+ "diasColetados": 7,
  "nomes": {
   "geral": "Geral",
   "casa": "Casa",
@@ -10,25 +10,11 @@
  },
  "semana": {
   "dias": 7,
-  "diasMedidos": 5,
+  "diasMedidos": 6,
   "completo": false,
   "desde": "2026-11-07",
   "segmentos": {
    "geral": [
-    {
-     "itemId": "58219914995",
-     "shopId": "1662955195",
-     "name": "Cascata de Natal Pisca Pisca 200 Leds 5 Metros 8 Funções e Fixo 110V/220V Colorido Decoração",
-     "image": "https://cf.shopee.com.br/file/br-11134207-820lw-mu0qm9tf1ate77",
-     "newPrice": 27.99,
-     "oldPrice": 48.26,
-     "discount": 42,
-     "sales": 3439,
-     "rating": 4.9,
-     "commission": 1.68,
-     "affiliateLink": "https://s.shopee.com.br/3LSM4vJKep",
-     "vendasPeriodo": 2303
-    },
     {
      "itemId": "23094369152",
      "shopId": "1293367579",
@@ -37,11 +23,25 @@
      "newPrice": 29.99,
      "oldPrice": 54.53,
      "discount": 45,
-     "sales": 5479,
-     "rating": 5,
+     "sales": 5949,
+     "rating": 4.9,
      "commission": 1.8,
-     "affiliateLink": "https://s.shopee.com.br/7KyUqH46XD",
-     "vendasPeriodo": 1943
+     "affiliateLink": "https://s.shopee.com.br/ql2fnKyb6",
+     "vendasPeriodo": 2413
+    },
+    {
+     "itemId": "58270243088",
+     "shopId": "1860098702",
+     "name": "Protetor Solar Facial Hidrabene FPS 70 Toque Seco - 50g",
+     "image": "https://cf.shopee.com.br/file/br-11134207-820me-mu5trnacuq691b",
+     "newPrice": 36.9,
+     "oldPrice": 36.9,
+     "discount": 0,
+     "sales": 12159,
+     "rating": 4.9,
+     "commission": 6.64,
+     "affiliateLink": "https://s.shopee.com.br/9pfrOQB5om",
+     "vendasPeriodo": 2252
     },
     {
      "itemId": "58269531963",
@@ -51,25 +51,25 @@
      "newPrice": 29.9,
      "oldPrice": 59.8,
      "discount": 50,
-     "sales": 8726,
+     "sales": 9122,
      "rating": 4.9,
      "commission": 4.78,
-     "affiliateLink": "https://s.shopee.com.br/4fxjfNEFwx",
-     "vendasPeriodo": 1584
+     "affiliateLink": "https://s.shopee.com.br/5fqIQg2ZnW",
+     "vendasPeriodo": 1980
     },
     {
      "itemId": "58217146071",
      "shopId": "1572051746",
      "name": "Kit 6/10/20 Metros Festão de Natal Decoração Enfeite Natalino 2 Metros 9cm Espessura Verde e Nevado",
      "image": "https://cf.shopee.com.br/file/br-11134207-820l7-msfjouwnsc921d",
-     "newPrice": 27.86,
-     "oldPrice": 39.8,
+     "newPrice": 39.06,
+     "oldPrice": 55.8,
      "discount": 30,
-     "sales": 6401,
+     "sales": 6747,
      "rating": 4.8,
-     "commission": 4.46,
-     "affiliateLink": "https://s.shopee.com.br/7fbLEt2prF",
-     "vendasPeriodo": 1490
+     "commission": 6.25,
+     "affiliateLink": "https://s.shopee.com.br/AKc7zFkoK6",
+     "vendasPeriodo": 1836
     },
     {
      "itemId": "21998858555",
@@ -79,11 +79,11 @@
      "newPrice": 9.9,
      "oldPrice": 24.75,
      "discount": 60,
-     "sales": 9260,
+     "sales": 9533,
      "rating": 4.6,
      "commission": 2.57,
-     "affiliateLink": "https://s.shopee.com.br/1W0htbGRCO",
-     "vendasPeriodo": 1216
+     "affiliateLink": "https://s.shopee.com.br/9fMRC1nLfu",
+     "vendasPeriodo": 1489
     },
     {
      "itemId": "23096150316",
@@ -93,25 +93,39 @@
      "newPrice": 9.89,
      "oldPrice": 26.03,
      "discount": 62,
-     "sales": 8136,
+     "sales": 8297,
      "rating": 4.9,
      "commission": 2.57,
-     "affiliateLink": "https://s.shopee.com.br/4LKtGnWSC7",
-     "vendasPeriodo": 902
+     "affiliateLink": "https://s.shopee.com.br/8pnKCUqWMv",
+     "vendasPeriodo": 1063
     },
     {
-     "itemId": "55666184367",
-     "shopId": "1350045638",
-     "name": "ROMANTIC CROWN Garrafa Térmica 800ml Aço Inox 304 Grande Capacidade com 2 Formas de Beber para Viagem e Esporte",
-     "image": "https://cf.shopee.com.br/file/br-11134207-820m6-muvpgy6h648z59",
-     "newPrice": 44.98,
-     "oldPrice": 99.96,
+     "itemId": "22892833180",
+     "shopId": "832036467",
+     "name": "40 Peças / 46 Peças Jogo De Chave Catraca Caixa De Ferramentas para Reparo de Carros / Conjuntos de Chaves",
+     "image": "https://cf.shopee.com.br/file/br-11134207-820l9-mqt86n8incape7",
+     "newPrice": 28.99,
+     "oldPrice": 87.85,
+     "discount": 67,
+     "sales": 14972,
+     "rating": 4.8,
+     "commission": 6.38,
+     "affiliateLink": "https://s.shopee.com.br/7KyWPjwEPk",
+     "vendasPeriodo": 856
+    },
+    {
+     "itemId": "58267485793",
+     "shopId": "1661007426",
+     "name": "Kit Potes Mantimentos Vidro Herméticos Com Tampa Bambu Alta Resistência Epsilon Transparente",
+     "image": "https://cf.shopee.com.br/file/br-11134207-820ld-mso4uf7pu0p11c",
+     "newPrice": 44.51,
+     "oldPrice": 98.91,
      "discount": 55,
-     "sales": 3235,
-     "rating": 5,
-     "commission": 4.95,
-     "affiliateLink": "https://s.shopee.com.br/4B1T4SG9xu",
-     "vendasPeriodo": 649
+     "sales": 11805,
+     "rating": 4.8,
+     "commission": 9.35,
+     "affiliateLink": "https://s.shopee.com.br/7VHwc2vb4n",
+     "vendasPeriodo": 532
     },
     {
      "itemId": "23994387054",
@@ -121,39 +135,25 @@
      "newPrice": 34.57,
      "oldPrice": 50.1,
      "discount": 31,
-     "sales": 9881,
+     "sales": 9975,
      "rating": 4.9,
      "commission": 10.03,
-     "affiliateLink": "https://s.shopee.com.br/1gK85rPg2f",
-     "vendasPeriodo": 236
+     "affiliateLink": "https://s.shopee.com.br/AUvYBe8YSy",
+     "vendasPeriodo": 330
     },
     {
-     "itemId": "18997974535",
-     "shopId": "1345719405",
-     "name": "Jogo 2/4/6 Taças 340Ml Vidro Diamond Bico Jaca Abacaxi Conjunto Taça Para Água Vinho Tinto Suco Diamante Mesa Posta",
-     "image": "https://cf.shopee.com.br/file/br-11134207-820lp-mldnylumwikm80",
-     "newPrice": 18.89,
-     "oldPrice": 49.71,
-     "discount": 62,
-     "sales": 831,
+     "itemId": "58262387632",
+     "shopId": "395166866",
+     "name": "Kit Renovadores Gota de Colágeno e Rosa Mosqueta Kokeshi",
+     "image": "https://cf.shopee.com.br/file/br-11134207-820lc-mume7ufalreo72",
+     "newPrice": 61.52,
+     "oldPrice": 106.07,
+     "discount": 42,
+     "sales": 5645,
      "rating": 4.9,
-     "commission": 3.02,
-     "affiliateLink": "https://s.shopee.com.br/2BGOgmNm1i",
-     "vendasPeriodo": 138
-    },
-    {
-     "itemId": "21034795993",
-     "shopId": "322387387",
-     "name": "Tapete de Banheiro Antiderrapante Bolinha Macarrão Várias Cores",
-     "image": "https://cf.shopee.com.br/file/sg-11134201-22100-yg4ftmeqs8iv0a",
-     "newPrice": 13.5,
-     "oldPrice": 30,
-     "discount": 55,
-     "sales": 5363,
-     "rating": 4.9,
-     "commission": 2.84,
-     "affiliateLink": "https://s.shopee.com.br/8VASEPzfAK",
-     "vendasPeriodo": 64
+     "commission": 14.76,
+     "affiliateLink": "https://s.shopee.com.br/5VWsESRac6",
+     "vendasPeriodo": 212
     }
    ],
    "casa": [
@@ -165,11 +165,11 @@
      "newPrice": 8.99,
      "oldPrice": 25.69,
      "discount": 65,
-     "sales": 76430,
+     "sales": 76862,
      "rating": 4.5,
      "commission": 0.9,
      "affiliateLink": "https://s.shopee.com.br/3g5CTa8BnP",
-     "vendasPeriodo": 4157
+     "vendasPeriodo": 4589
     },
     {
      "itemId": "22893738408",
@@ -179,25 +179,25 @@
      "newPrice": 14.99,
      "oldPrice": 49.97,
      "discount": 70,
-     "sales": 59946,
+     "sales": 60906,
      "rating": 4.8,
      "commission": 2.25,
      "affiliateLink": "https://s.shopee.com.br/2qW5U3BMUG",
-     "vendasPeriodo": 3436
+     "vendasPeriodo": 4396
     },
     {
      "itemId": "19798129665",
      "shopId": "1384073074",
      "name": "Fita Selante De Pvc À Prova D 'Água Para Cozinha / Banheiro / Banheira",
      "image": "https://cf.shopee.com.br/file/sg-11134201-7reom-m8urr8l8bo2x62",
-     "newPrice": 10.5,
-     "oldPrice": 32.81,
+     "newPrice": 10,
+     "oldPrice": 31.25,
      "discount": 68,
-     "sales": 13400,
+     "sales": 14324,
      "rating": 4.7,
-     "commission": 1.37,
-     "affiliateLink": "https://s.shopee.com.br/1BNrUzHhsA",
-     "vendasPeriodo": 3189
+     "commission": 1.3,
+     "affiliateLink": "https://s.shopee.com.br/5q9id1IayL",
+     "vendasPeriodo": 4113
     },
     {
      "itemId": "21998858555",
@@ -207,11 +207,11 @@
      "newPrice": 9.9,
      "oldPrice": 24.75,
      "discount": 60,
-     "sales": 9260,
+     "sales": 9533,
      "rating": 4.6,
      "commission": 2.57,
-     "affiliateLink": "https://s.shopee.com.br/1W0htbGRCO",
-     "vendasPeriodo": 1216
+     "affiliateLink": "https://s.shopee.com.br/9fMRC1nLfu",
+     "vendasPeriodo": 1489
     },
     {
      "itemId": "23093960843",
@@ -221,11 +221,11 @@
      "newPrice": 11.45,
      "oldPrice": 27.26,
      "discount": 58,
-     "sales": 19172,
+     "sales": 19644,
      "rating": 4.9,
      "commission": 1.15,
      "affiliateLink": "https://s.shopee.com.br/4fxjfPVBW5",
-     "vendasPeriodo": 1009
+     "vendasPeriodo": 1481
     },
     {
      "itemId": "22494391164",
@@ -235,11 +235,11 @@
      "newPrice": 10,
      "oldPrice": 14.93,
      "discount": 33,
-     "sales": 21017,
+     "sales": 21268,
      "rating": 4.8,
      "commission": 1.6,
      "affiliateLink": "https://s.shopee.com.br/5Au0GL2Tko",
-     "vendasPeriodo": 912
+     "vendasPeriodo": 1163
     },
     {
      "itemId": "23096150316",
@@ -249,25 +249,11 @@
      "newPrice": 9.89,
      "oldPrice": 26.03,
      "discount": 62,
-     "sales": 8136,
+     "sales": 8297,
      "rating": 4.9,
      "commission": 2.57,
-     "affiliateLink": "https://s.shopee.com.br/4LKtGnWSC7",
-     "vendasPeriodo": 902
-    },
-    {
-     "itemId": "58253567352",
-     "shopId": "1412103756",
-     "name": "Faca Cutelo e Camping Artesanal, Aço Inox Afiado com Bainha de Couro Legítimo, Ideal para Desossar Carne e Aventura",
-     "image": "https://cf.shopee.com.br/file/sg-11134201-8260n-mjnui2ml5rls51",
-     "newPrice": 15.99,
-     "oldPrice": 32.63,
-     "discount": 51,
-     "sales": 9708,
-     "rating": 4.8,
-     "commission": 1.76,
-     "affiliateLink": "https://s.shopee.com.br/9zzG1Dk4xF",
-     "vendasPeriodo": 807
+     "affiliateLink": "https://s.shopee.com.br/8pnKCUqWMv",
+     "vendasPeriodo": 1063
     },
     {
      "itemId": "23798560672",
@@ -277,28 +263,84 @@
      "newPrice": 12.9,
      "oldPrice": 18.97,
      "discount": 32,
-     "sales": 11939,
+     "sales": 12220,
      "rating": 4.8,
      "commission": 0.77,
      "affiliateLink": "https://s.shopee.com.br/1qdYIDFAWU",
-     "vendasPeriodo": 769
+     "vendasPeriodo": 1050
     },
     {
      "itemId": "58258562285",
      "shopId": "1795268131",
      "name": "Suporte Organizador De Ovos Dispenser Para Geladeira Prático Anti-Queda Utensílios De Cozinha Original",
      "image": "https://cf.shopee.com.br/file/sg-11134201-81zvu-mmvetjba5xq9cb",
-     "newPrice": 10.98,
-     "oldPrice": 22.41,
-     "discount": 51,
-     "sales": 6768,
+     "newPrice": 4.99,
+     "oldPrice": 19.96,
+     "discount": 75,
+     "sales": 7025,
      "rating": 4.9,
-     "commission": 1.32,
-     "affiliateLink": "https://s.shopee.com.br/4VeJT6Vor8",
-     "vendasPeriodo": 764
+     "commission": 0.6,
+     "affiliateLink": "https://s.shopee.com.br/2LZqSaVv4y",
+     "vendasPeriodo": 1021
+    },
+    {
+     "itemId": "58253567352",
+     "shopId": "1412103756",
+     "name": "Faca Cutelo e Camping Artesanal, Aço Inox Afiado com Bainha de Couro Legítimo, Ideal para Desossar Carne e Aventura",
+     "image": "https://cf.shopee.com.br/file/sg-11134201-8260n-mjnui2ml5rls51",
+     "newPrice": 15.99,
+     "oldPrice": 32.63,
+     "discount": 51,
+     "sales": 9905,
+     "rating": 4.8,
+     "commission": 1.76,
+     "affiliateLink": "https://s.shopee.com.br/9pfrON3MrF",
+     "vendasPeriodo": 1004
     }
    ],
    "beauty": [
+    {
+     "itemId": "55865986117",
+     "shopId": "457864097",
+     "name": "JBSARA Revive Spicule Shot 102 Ampoule Serum 1g 1ea",
+     "image": "https://cf.shopee.com.br/file/sg-11134207-8258w-mrv26l1j53igaa",
+     "newPrice": 3.49,
+     "oldPrice": 9.43,
+     "discount": 63,
+     "sales": 40896,
+     "rating": 5,
+     "commission": 0.56,
+     "affiliateLink": "https://s.shopee.com.br/8pnKCaEtqY",
+     "vendasPeriodo": 13050
+    },
+    {
+     "itemId": "23993471317",
+     "shopId": "1347491961",
+     "name": "BB CreamBase/Corretivo com Esponja com Formato de Cogumelo Base Clareador Maquiagem Creme Clareador Cor Marfim e Natural",
+     "image": "https://cf.shopee.com.br/file/br-11134207-7r98o-m1jvmgodmffube",
+     "newPrice": 27.59,
+     "oldPrice": 35.37,
+     "discount": 22,
+     "sales": 19714,
+     "rating": 4.9,
+     "commission": 3.03,
+     "affiliateLink": "https://s.shopee.com.br/8Kr3bedCoE",
+     "vendasPeriodo": 3500
+    },
+    {
+     "itemId": "21235699753",
+     "shopId": "711418084",
+     "name": "Fadvan 5D W Extensões De Cílios Em Forma De 0.07 C/D Faux Mink Natural Lashes Profissionais Suaves",
+     "image": "https://cf.shopee.com.br/file/cn-11134207-820l4-mv13hxd19hxd38",
+     "newPrice": 20.99,
+     "oldPrice": 58.31,
+     "discount": 64,
+     "sales": 22561,
+     "rating": 4.8,
+     "commission": 3.36,
+     "affiliateLink": "https://s.shopee.com.br/8AXdPLdq9B",
+     "vendasPeriodo": 3286
+    },
     {
      "itemId": "58212716558",
      "shopId": "1855095856",
@@ -307,11 +349,11 @@
      "newPrice": 36.99,
      "oldPrice": 60.64,
      "discount": 39,
-     "sales": 27158,
+     "sales": 27563,
      "rating": 4.9,
      "commission": 8.88,
      "affiliateLink": "https://s.shopee.com.br/6AmXSGrMrr",
-     "vendasPeriodo": 2634
+     "vendasPeriodo": 3039
     },
     {
      "itemId": "41557489268",
@@ -321,11 +363,11 @@
      "newPrice": 39.9,
      "oldPrice": 79.8,
      "discount": 50,
-     "sales": 18587,
+     "sales": 19032,
      "rating": 4.9,
      "commission": 9.98,
      "affiliateLink": "https://s.shopee.com.br/60T7Fxs0Co",
-     "vendasPeriodo": 2076
+     "vendasPeriodo": 2521
     },
     {
      "itemId": "58212431677",
@@ -335,25 +377,39 @@
      "newPrice": 13.99,
      "oldPrice": 21.52,
      "discount": 35,
-     "sales": 9404,
+     "sales": 9883,
      "rating": 4.9,
      "commission": 1.4,
      "affiliateLink": "https://s.shopee.com.br/5Au0GQvAtm",
-     "vendasPeriodo": 1877
+     "vendasPeriodo": 2356
     },
     {
-     "itemId": "58262782056",
-     "shopId": "1855095856",
-     "name": "Sérum Leave-in com Tecnologia Ativada por Calor para Efeito Liso, Antifrizz, L'Oréal Paris Elseve Liso dos Sonhos 100ml",
-     "image": "https://cf.shopee.com.br/file/br-11134207-820md-mpmi7ellauwy82",
+     "itemId": "58270243088",
+     "shopId": "1860098702",
+     "name": "Protetor Solar Facial Hidrabene FPS 70 Toque Seco - 50g",
+     "image": "https://cf.shopee.com.br/file/br-11134207-820me-mu5trnacuq691b",
      "newPrice": 36.9,
-     "oldPrice": 61.5,
-     "discount": 40,
-     "sales": 12071,
-     "rating": 5,
-     "commission": 7.38,
-     "affiliateLink": "https://s.shopee.com.br/40i2sHzcGb",
-     "vendasPeriodo": 1480
+     "oldPrice": 36.9,
+     "discount": 0,
+     "sales": 12159,
+     "rating": 4.9,
+     "commission": 6.64,
+     "affiliateLink": "https://s.shopee.com.br/9pfrOQB5om",
+     "vendasPeriodo": 2252
+    },
+    {
+     "itemId": "49912454334",
+     "shopId": "1461479318",
+     "name": "Maria 5D W M Curl UC/UD Cílios Fácil LU Ventilador Extensões De Atacado Volume Pré-Fabricado Estilo W Natural Macio",
+     "image": "https://cf.shopee.com.br/file/cn-11134207-820l4-mpj7tsq5r0gb60",
+     "newPrice": 19,
+     "oldPrice": 35.19,
+     "discount": 46,
+     "sales": 10441,
+     "rating": 4.6,
+     "commission": 2.09,
+     "affiliateLink": "https://s.shopee.com.br/8VATnxcZTH",
+     "vendasPeriodo": 1856
     },
     {
      "itemId": "58254438880",
@@ -363,84 +419,42 @@
      "newPrice": 11.99,
      "oldPrice": 26.64,
      "discount": 55,
-     "sales": 16075,
+     "sales": 16356,
      "rating": 4.8,
      "commission": 1.2,
      "affiliateLink": "https://s.shopee.com.br/5q9h3esdXp",
-     "vendasPeriodo": 1476
+     "vendasPeriodo": 1757
     },
     {
-     "itemId": "22793516674",
-     "shopId": "1398532513",
-     "name": "Máquina De Cortar Cabelo Para Barba Masculina Designer Aleatório Elétrico Profissional",
-     "image": "https://cf.shopee.com.br/file/sg-11134201-7req6-m2ck7qvnzjxy5c",
-     "newPrice": 14.98,
-     "oldPrice": 18.05,
-     "discount": 17,
-     "sales": 8647,
-     "rating": 4.8,
-     "commission": 0.9,
-     "affiliateLink": "https://s.shopee.com.br/4qH9rowRZg",
-     "vendasPeriodo": 981
-    },
-    {
-     "itemId": "40815571485",
-     "shopId": "1441157744",
-     "name": "CRONOGRAMA CAPILAR 5 EM 1 TEIA PASSO ÚNICO - H.N.R.R.P - FINA MARIA",
-     "image": "https://cf.shopee.com.br/file/sg-11134201-825ak-mr1yspqi0ow563",
-     "newPrice": 39.9,
-     "oldPrice": 79.8,
-     "discount": 50,
-     "sales": 10652,
+     "itemId": "21299677651",
+     "shopId": "1485160784",
+     "name": "BB CreamBase/Corretivo com Esponja com Formato de Cogumelo Base Clareador Maquiagem Creme Clareador Cor Marfim e Natural",
+     "image": "https://cf.shopee.com.br/file/sg-11134201-7reop-m817hciex8sg71",
+     "newPrice": 31.66,
+     "oldPrice": 44.59,
+     "discount": 29,
+     "sales": 12330,
      "rating": 4.9,
-     "commission": 7.98,
-     "affiliateLink": "https://s.shopee.com.br/5LDQSjuXYk",
-     "vendasPeriodo": 922
-    },
-    {
-     "itemId": "25946709329",
-     "shopId": "1441157744",
-     "name": "ULTRA HIDRATAÇÃO EFEITO TEIA COM ÓLEOS MARROQUINOS - OURO MARROQUINO - FINA MARIA PROFISSIONAL",
-     "image": "https://cf.shopee.com.br/file/sg-11134201-8258h-mr1ynaykoao016",
-     "newPrice": 39.97,
-     "oldPrice": 79.94,
-     "discount": 50,
-     "sales": 34421,
-     "rating": 4.9,
-     "commission": 7.99,
-     "affiliateLink": "https://s.shopee.com.br/6VPNqsq6Bt",
-     "vendasPeriodo": 845
-    },
-    {
-     "itemId": "23394267693",
-     "shopId": "1553099932",
-     "name": "Shampoo Escurecedor Cabelos Brancos Tonalizante Colored 300ml Efeito 100% Natural Super Resultado",
-     "image": "https://cf.shopee.com.br/file/br-11134207-820mf-mmajzmcmll3a15",
-     "newPrice": 14.99,
-     "oldPrice": 71.38,
-     "discount": 79,
-     "sales": 9819,
-     "rating": 4.6,
-     "commission": 3.15,
-     "affiliateLink": "https://s.shopee.com.br/4fxjfVx4uf",
-     "vendasPeriodo": 759
-    },
-    {
-     "itemId": "23798710869",
-     "shopId": "1045085918",
-     "name": "Lavitan Cabelos e Unhas 30 Comprimidos - Cimed",
-     "image": "https://cf.shopee.com.br/file/br-11134207-81z1k-mdz4bsq0i29s68",
-     "newPrice": 10.99,
-     "oldPrice": 22.43,
-     "discount": 51,
-     "sales": 11742,
-     "rating": 4.9,
-     "commission": 1.1,
-     "affiliateLink": "https://s.shopee.com.br/5VWqf2tuDn",
-     "vendasPeriodo": 726
+     "commission": 4.75,
+     "affiliateLink": "https://s.shopee.com.br/8fTu0Gbw8K",
+     "vendasPeriodo": 1630
     }
    ],
    "tech": [
+    {
+     "itemId": "48717947960",
+     "shopId": "1604972581",
+     "name": "Fone De Ouvido Inpods 13 Bluetooth Sem Fio Com Microfone Fones esportivos Adequado Branco",
+     "image": "https://cf.shopee.com.br/file/sg-11134201-825bb-mt7fxycgurra13",
+     "newPrice": 19.99,
+     "oldPrice": 68.93,
+     "discount": 71,
+     "sales": 6863,
+     "rating": 4.7,
+     "commission": 1.2,
+     "affiliateLink": "https://s.shopee.com.br/1W0jT7gLQa",
+     "vendasPeriodo": 1883
+    },
     {
      "itemId": "22793090494",
      "shopId": "328666563",
@@ -449,25 +463,11 @@
      "newPrice": 20.99,
      "oldPrice": 59.97,
      "discount": 65,
-     "sales": 6821,
+     "sales": 7082,
      "rating": 4.7,
      "commission": 1.26,
-     "affiliateLink": "https://s.shopee.com.br/9pfpp18YCK",
-     "vendasPeriodo": 1542
-    },
-    {
-     "itemId": "40101081460",
-     "shopId": "1006215031",
-     "name": "Suporte Para Telefone Principal Alça De Montagem Ajustável Multifuncional Tiro Ao Vivo Primeira Pessoa Com Clipe",
-     "image": "https://cf.shopee.com.br/file/sg-11134201-823p0-mp4mz19cdwy796",
-     "newPrice": 24.46,
-     "oldPrice": 24.96,
-     "discount": 2,
-     "sales": 14966,
-     "rating": 4.9,
-     "commission": 2.45,
-     "affiliateLink": "https://s.shopee.com.br/2qW5UAhjSG",
-     "vendasPeriodo": 1156
+     "affiliateLink": "https://s.shopee.com.br/1LhJGogylZ",
+     "vendasPeriodo": 1803
     },
     {
      "itemId": "40331456554",
@@ -477,39 +477,25 @@
      "newPrice": 19.29,
      "oldPrice": 21.43,
      "discount": 10,
-     "sales": 18467,
+     "sales": 18652,
      "rating": 4.8,
      "commission": 3.09,
      "affiliateLink": "https://s.shopee.com.br/AUvWcF60qO",
-     "vendasPeriodo": 995
+     "vendasPeriodo": 1180
     },
     {
      "itemId": "22892686035",
      "shopId": "987393610",
      "name": "Fone de Ouvido entrada lightning para Iphone Microfone Bluetooth",
      "image": "https://cf.shopee.com.br/file/sg-11134201-7rbkc-lpcgfnwj651k1e",
-     "newPrice": 9.48,
-     "oldPrice": 29.63,
-     "discount": 68,
-     "sales": 5652,
+     "newPrice": 8.99,
+     "oldPrice": 29.97,
+     "discount": 70,
+     "sales": 5873,
      "rating": 4.7,
-     "commission": 1.33,
-     "affiliateLink": "https://s.shopee.com.br/9fMPci9BXJ",
-     "vendasPeriodo": 941
-    },
-    {
-     "itemId": "23091546001",
-     "shopId": "832040275",
-     "name": "Amplificador De Imagem Da Tela Do Celular Lupa 3D 21,6CM*16,6CM*2,7CM Promoção",
-     "image": "https://cf.shopee.com.br/file/sg-11134201-8259l-mskzqxceqnm23c",
-     "newPrice": 16.98,
-     "oldPrice": 29.79,
-     "discount": 43,
-     "sales": 10803,
-     "rating": 4.6,
-     "commission": 4.41,
-     "affiliateLink": "https://s.shopee.com.br/3g5CTheYlP",
-     "vendasPeriodo": 863
+     "commission": 1.26,
+     "affiliateLink": "https://s.shopee.com.br/ql2ftismW",
+     "vendasPeriodo": 1162
     },
     {
      "itemId": "23798855636",
@@ -519,39 +505,39 @@
      "newPrice": 16.99,
      "oldPrice": 41.44,
      "discount": 59,
-     "sales": 5140,
+     "sales": 5288,
      "rating": 4.8,
      "commission": 1.02,
-     "affiliateLink": "https://s.shopee.com.br/9V2zQP9osI",
-     "vendasPeriodo": 836
+     "affiliateLink": "https://s.shopee.com.br/1gK9fQfi5f",
+     "vendasPeriodo": 984
     },
     {
      "itemId": "8514428979",
      "shopId": "341061019",
      "name": "Fone De Ouvido Sem Fio E6s Bluetooth 5.0  Tws Preto",
      "image": "https://cf.shopee.com.br/file/sg-11134201-822yz-mi8voaunyole28",
-     "newPrice": 18.5,
-     "oldPrice": 48.68,
-     "discount": 62,
-     "sales": 4544,
+     "newPrice": 19.99,
+     "oldPrice": 48.76,
+     "discount": 59,
+     "sales": 4694,
      "rating": 4.7,
-     "commission": 1.11,
-     "affiliateLink": "https://s.shopee.com.br/8AXbpxEtaA",
-     "vendasPeriodo": 687
+     "commission": 1.2,
+     "affiliateLink": "https://s.shopee.com.br/4fxlEwUI0P",
+     "vendasPeriodo": 837
     },
     {
-     "itemId": "22397182247",
-     "shopId": "987393610",
-     "name": "Carregador iPhone Turbo Tipo-C 20W + Cabo Lightining para IPhone Carga rápida",
-     "image": "https://cf.shopee.com.br/file/sg-11134201-7rbkw-lpcg9rytbas79a",
-     "newPrice": 15.49,
-     "oldPrice": 49.97,
-     "discount": 69,
-     "sales": 9424,
+     "itemId": "22794271989",
+     "shopId": "1577854515",
+     "name": "Fone P47 Headphone Sem Fio Estéreo Redução de Ruídos Bluetooth 5.0 Universal",
+     "image": "https://cf.shopee.com.br/file/sg-11134201-7rdym-mctjrn6q55a16e",
+     "newPrice": 18.87,
+     "oldPrice": 29.03,
+     "discount": 35,
+     "sales": 5148,
      "rating": 4.8,
-     "commission": 2.17,
-     "affiliateLink": "https://s.shopee.com.br/2gCfHriMnF",
-     "vendasPeriodo": 585
+     "commission": 1.13,
+     "affiliateLink": "https://s.shopee.com.br/1BNt4Vhc6c",
+     "vendasPeriodo": 361
     },
     {
      "itemId": "43831244046",
@@ -561,11 +547,11 @@
      "newPrice": 56.99,
      "oldPrice": 64.76,
      "discount": 12,
-     "sales": 2656,
+     "sales": 2695,
      "rating": 4.8,
      "commission": 3.42,
      "affiliateLink": "https://s.shopee.com.br/7Af4e8vYHn",
-     "vendasPeriodo": 313
+     "vendasPeriodo": 352
     },
     {
      "itemId": "58216433905",
@@ -575,11 +561,25 @@
      "newPrice": 17.99,
      "oldPrice": 43.88,
      "discount": 59,
-     "sales": 6219,
+     "sales": 6233,
      "rating": 4.8,
      "commission": 1.08,
-     "affiliateLink": "https://s.shopee.com.br/9KjZE6ASDH",
-     "vendasPeriodo": 272
+     "affiliateLink": "https://s.shopee.com.br/gRcTajW7V",
+     "vendasPeriodo": 286
+    },
+    {
+     "itemId": "22997591579",
+     "shopId": "1060793149",
+     "name": "Air Pro 4 Tws Fone De Ouvido Sem Fio Bluetooth 5.1Mini Fones Esportivos Para Android / Ios iphone",
+     "image": "https://cf.shopee.com.br/file/sg-11134201-7rd3v-lwp2d1s7sky0f0",
+     "newPrice": 19.99,
+     "oldPrice": 60.58,
+     "discount": 67,
+     "sales": 4755,
+     "rating": 4.6,
+     "commission": 1.2,
+     "affiliateLink": "https://s.shopee.com.br/3g5E36Y62N",
+     "vendasPeriodo": 285
     }
    ],
    "style": [
@@ -591,11 +591,11 @@
      "newPrice": 13.9,
      "oldPrice": 15.98,
      "discount": 13,
-     "sales": 7519,
+     "sales": 8453,
      "rating": 4.8,
      "commission": 1.81,
      "affiliateLink": "https://s.shopee.com.br/1qdYIMKGQ6",
-     "vendasPeriodo": 2792
+     "vendasPeriodo": 3726
     },
     {
      "itemId": "22594546423",
@@ -605,11 +605,11 @@
      "newPrice": 14.97,
      "oldPrice": 25.81,
      "discount": 42,
-     "sales": 5463,
+     "sales": 5712,
      "rating": 4.8,
      "commission": 2.54,
      "affiliateLink": "https://s.shopee.com.br/5VWqf79tB3",
-     "vendasPeriodo": 490
+     "vendasPeriodo": 739
     },
     {
      "itemId": "56057690048",
@@ -619,11 +619,11 @@
      "newPrice": 134.99,
      "oldPrice": 155.16,
      "discount": 13,
-     "sales": 5451,
+     "sales": 5574,
      "rating": 4.9,
      "commission": 8.1,
      "affiliateLink": "https://s.shopee.com.br/6VPNqx659L",
-     "vendasPeriodo": 458
+     "vendasPeriodo": 581
     },
     {
      "itemId": "57113764077",
@@ -633,39 +633,39 @@
      "newPrice": 53.99,
      "oldPrice": 138.44,
      "discount": 61,
-     "sales": 3858,
+     "sales": 3941,
      "rating": 4.9,
      "commission": 5.4,
      "affiliateLink": "https://s.shopee.com.br/7KyUqU2uSa",
-     "vendasPeriodo": 425
+     "vendasPeriodo": 508
     },
     {
      "itemId": "53206856617",
      "shopId": "426378412",
      "name": "Lovito Nacional Vestido Casual Feminino Primavera/verão LK4LD398",
      "image": "https://cf.shopee.com.br/file/sg-11134201-825b5-mvfk0xy1su1092",
-     "newPrice": 56.9,
-     "oldPrice": 82.46,
-     "discount": 31,
-     "sales": 2304,
+     "newPrice": 55.76,
+     "oldPrice": 82,
+     "discount": 32,
+     "sales": 2401,
      "rating": 4.9,
-     "commission": 5.69,
-     "affiliateLink": "https://s.shopee.com.br/8VASEbustm",
-     "vendasPeriodo": 401
+     "commission": 5.58,
+     "affiliateLink": "https://s.shopee.com.br/3qOeFSsBCO",
+     "vendasPeriodo": 498
     },
     {
      "itemId": "21797728567",
      "shopId": "390307022",
      "name": "Arara 4/5 Andares Multiuso c/ Sapateira, Cabideiro e Suporte p/ Roupas, Tênis e Closet Quarto",
      "image": "https://cf.shopee.com.br/file/sg-11134201-7req6-m8dk5gglfv7k20",
-     "newPrice": 41.48,
-     "oldPrice": 172.83,
-     "discount": 76,
-     "sales": 4215,
+     "newPrice": 40.49,
+     "oldPrice": 176.04,
+     "discount": 77,
+     "sales": 4333,
      "rating": 4.8,
-     "commission": 4.98,
+     "commission": 4.86,
      "affiliateLink": "https://s.shopee.com.br/6AmXSL7LpF",
-     "vendasPeriodo": 377
+     "vendasPeriodo": 495
     },
     {
      "itemId": "4685526528",
@@ -675,11 +675,11 @@
      "newPrice": 10.99,
      "oldPrice": 13.74,
      "discount": 20,
-     "sales": 5413,
+     "sales": 5523,
      "rating": 4.8,
      "commission": 0.66,
      "affiliateLink": "https://s.shopee.com.br/5LDQSmXk3l",
-     "vendasPeriodo": 327
+     "vendasPeriodo": 437
     },
     {
      "itemId": "57008381938",
@@ -689,11 +689,11 @@
      "newPrice": 61.99,
      "oldPrice": 99.98,
      "discount": 38,
-     "sales": 3628,
+     "sales": 3685,
      "rating": 4.8,
      "commission": 3.72,
      "affiliateLink": "https://s.shopee.com.br/7fbLF61dmg",
-     "vendasPeriodo": 306
+     "vendasPeriodo": 363
     },
     {
      "itemId": "23198072057",
@@ -703,50 +703,36 @@
      "newPrice": 37.58,
      "oldPrice": 98.89,
      "discount": 62,
-     "sales": 2197,
+     "sales": 2267,
      "rating": 4.9,
      "commission": 4.13,
      "affiliateLink": "https://s.shopee.com.br/4fxjfYaHPp",
-     "vendasPeriodo": 255
+     "vendasPeriodo": 325
     },
     {
-     "itemId": "22410204340",
-     "shopId": "825207596",
-     "name": "Vestido QUEIMA DE ESTOQUE! Envio Rápido casual mais vendidos  fenda lateral MIDI de bolso  moda feminina  verão  tubinho",
-     "image": "https://cf.shopee.com.br/file/br-11134201-820lz-mvcnz8a9atc043",
-     "newPrice": 29.99,
-     "oldPrice": 29.99,
+     "itemId": "23497594302",
+     "shopId": "1198407784",
+     "name": "ROMANTIC CROWN Mochila de Viagem Expansível, Bolsa Executiva Notebook Masculina e Feminina Trabalho,Grande,Reforçada",
+     "image": "https://cf.shopee.com.br/file/br-11134207-820la-mu7g0m7pk9vl21",
+     "newPrice": 99.98,
+     "oldPrice": 99.98,
      "discount": 0,
-     "sales": 2675,
-     "rating": 4.5,
-     "commission": 1.8,
-     "affiliateLink": "https://s.shopee.com.br/1Bu6zRF8r",
-     "vendasPeriodo": 222
+     "sales": 3440,
+     "rating": 5,
+     "commission": 11,
+     "affiliateLink": "https://s.shopee.com.br/4VeJTFaukk",
+     "vendasPeriodo": 292
     }
    ]
   }
  },
  "mes": {
   "dias": 30,
-  "diasMedidos": 5,
+  "diasMedidos": 6,
   "completo": false,
   "desde": "2026-11-07",
   "segmentos": {
    "geral": [
-    {
-     "itemId": "58219914995",
-     "shopId": "1662955195",
-     "name": "Cascata de Natal Pisca Pisca 200 Leds 5 Metros 8 Funções e Fixo 110V/220V Colorido Decoração",
-     "image": "https://cf.shopee.com.br/file/br-11134207-820lw-mu0qm9tf1ate77",
-     "newPrice": 27.99,
-     "oldPrice": 48.26,
-     "discount": 42,
-     "sales": 3439,
-     "rating": 4.9,
-     "commission": 1.68,
-     "affiliateLink": "https://s.shopee.com.br/3LSM4vJKep",
-     "vendasPeriodo": 2303
-    },
     {
      "itemId": "23094369152",
      "shopId": "1293367579",
@@ -755,11 +741,25 @@
      "newPrice": 29.99,
      "oldPrice": 54.53,
      "discount": 45,
-     "sales": 5479,
-     "rating": 5,
+     "sales": 5949,
+     "rating": 4.9,
      "commission": 1.8,
-     "affiliateLink": "https://s.shopee.com.br/7KyUqH46XD",
-     "vendasPeriodo": 1943
+     "affiliateLink": "https://s.shopee.com.br/ql2fnKyb6",
+     "vendasPeriodo": 2413
+    },
+    {
+     "itemId": "58270243088",
+     "shopId": "1860098702",
+     "name": "Protetor Solar Facial Hidrabene FPS 70 Toque Seco - 50g",
+     "image": "https://cf.shopee.com.br/file/br-11134207-820me-mu5trnacuq691b",
+     "newPrice": 36.9,
+     "oldPrice": 36.9,
+     "discount": 0,
+     "sales": 12159,
+     "rating": 4.9,
+     "commission": 6.64,
+     "affiliateLink": "https://s.shopee.com.br/9pfrOQB5om",
+     "vendasPeriodo": 2252
     },
     {
      "itemId": "58269531963",
@@ -769,25 +769,25 @@
      "newPrice": 29.9,
      "oldPrice": 59.8,
      "discount": 50,
-     "sales": 8726,
+     "sales": 9122,
      "rating": 4.9,
      "commission": 4.78,
-     "affiliateLink": "https://s.shopee.com.br/4fxjfNEFwx",
-     "vendasPeriodo": 1584
+     "affiliateLink": "https://s.shopee.com.br/5fqIQg2ZnW",
+     "vendasPeriodo": 1980
     },
     {
      "itemId": "58217146071",
      "shopId": "1572051746",
      "name": "Kit 6/10/20 Metros Festão de Natal Decoração Enfeite Natalino 2 Metros 9cm Espessura Verde e Nevado",
      "image": "https://cf.shopee.com.br/file/br-11134207-820l7-msfjouwnsc921d",
-     "newPrice": 27.86,
-     "oldPrice": 39.8,
+     "newPrice": 39.06,
+     "oldPrice": 55.8,
      "discount": 30,
-     "sales": 6401,
+     "sales": 6747,
      "rating": 4.8,
-     "commission": 4.46,
-     "affiliateLink": "https://s.shopee.com.br/7fbLEt2prF",
-     "vendasPeriodo": 1490
+     "commission": 6.25,
+     "affiliateLink": "https://s.shopee.com.br/AKc7zFkoK6",
+     "vendasPeriodo": 1836
     },
     {
      "itemId": "21998858555",
@@ -797,11 +797,11 @@
      "newPrice": 9.9,
      "oldPrice": 24.75,
      "discount": 60,
-     "sales": 9260,
+     "sales": 9533,
      "rating": 4.6,
      "commission": 2.57,
-     "affiliateLink": "https://s.shopee.com.br/1W0htbGRCO",
-     "vendasPeriodo": 1216
+     "affiliateLink": "https://s.shopee.com.br/9fMRC1nLfu",
+     "vendasPeriodo": 1489
     },
     {
      "itemId": "23096150316",
@@ -811,25 +811,39 @@
      "newPrice": 9.89,
      "oldPrice": 26.03,
      "discount": 62,
-     "sales": 8136,
+     "sales": 8297,
      "rating": 4.9,
      "commission": 2.57,
-     "affiliateLink": "https://s.shopee.com.br/4LKtGnWSC7",
-     "vendasPeriodo": 902
+     "affiliateLink": "https://s.shopee.com.br/8pnKCUqWMv",
+     "vendasPeriodo": 1063
     },
     {
-     "itemId": "55666184367",
-     "shopId": "1350045638",
-     "name": "ROMANTIC CROWN Garrafa Térmica 800ml Aço Inox 304 Grande Capacidade com 2 Formas de Beber para Viagem e Esporte",
-     "image": "https://cf.shopee.com.br/file/br-11134207-820m6-muvpgy6h648z59",
-     "newPrice": 44.98,
-     "oldPrice": 99.96,
+     "itemId": "22892833180",
+     "shopId": "832036467",
+     "name": "40 Peças / 46 Peças Jogo De Chave Catraca Caixa De Ferramentas para Reparo de Carros / Conjuntos de Chaves",
+     "image": "https://cf.shopee.com.br/file/br-11134207-820l9-mqt86n8incape7",
+     "newPrice": 28.99,
+     "oldPrice": 87.85,
+     "discount": 67,
+     "sales": 14972,
+     "rating": 4.8,
+     "commission": 6.38,
+     "affiliateLink": "https://s.shopee.com.br/7KyWPjwEPk",
+     "vendasPeriodo": 856
+    },
+    {
+     "itemId": "58267485793",
+     "shopId": "1661007426",
+     "name": "Kit Potes Mantimentos Vidro Herméticos Com Tampa Bambu Alta Resistência Epsilon Transparente",
+     "image": "https://cf.shopee.com.br/file/br-11134207-820ld-mso4uf7pu0p11c",
+     "newPrice": 44.51,
+     "oldPrice": 98.91,
      "discount": 55,
-     "sales": 3235,
-     "rating": 5,
-     "commission": 4.95,
-     "affiliateLink": "https://s.shopee.com.br/4B1T4SG9xu",
-     "vendasPeriodo": 649
+     "sales": 11805,
+     "rating": 4.8,
+     "commission": 9.35,
+     "affiliateLink": "https://s.shopee.com.br/7VHwc2vb4n",
+     "vendasPeriodo": 532
     },
     {
      "itemId": "23994387054",
@@ -839,39 +853,25 @@
      "newPrice": 34.57,
      "oldPrice": 50.1,
      "discount": 31,
-     "sales": 9881,
+     "sales": 9975,
      "rating": 4.9,
      "commission": 10.03,
-     "affiliateLink": "https://s.shopee.com.br/1gK85rPg2f",
-     "vendasPeriodo": 236
+     "affiliateLink": "https://s.shopee.com.br/AUvYBe8YSy",
+     "vendasPeriodo": 330
     },
     {
-     "itemId": "18997974535",
-     "shopId": "1345719405",
-     "name": "Jogo 2/4/6 Taças 340Ml Vidro Diamond Bico Jaca Abacaxi Conjunto Taça Para Água Vinho Tinto Suco Diamante Mesa Posta",
-     "image": "https://cf.shopee.com.br/file/br-11134207-820lp-mldnylumwikm80",
-     "newPrice": 18.89,
-     "oldPrice": 49.71,
-     "discount": 62,
-     "sales": 831,
+     "itemId": "58262387632",
+     "shopId": "395166866",
+     "name": "Kit Renovadores Gota de Colágeno e Rosa Mosqueta Kokeshi",
+     "image": "https://cf.shopee.com.br/file/br-11134207-820lc-mume7ufalreo72",
+     "newPrice": 61.52,
+     "oldPrice": 106.07,
+     "discount": 42,
+     "sales": 5645,
      "rating": 4.9,
-     "commission": 3.02,
-     "affiliateLink": "https://s.shopee.com.br/2BGOgmNm1i",
-     "vendasPeriodo": 138
-    },
-    {
-     "itemId": "21034795993",
-     "shopId": "322387387",
-     "name": "Tapete de Banheiro Antiderrapante Bolinha Macarrão Várias Cores",
-     "image": "https://cf.shopee.com.br/file/sg-11134201-22100-yg4ftmeqs8iv0a",
-     "newPrice": 13.5,
-     "oldPrice": 30,
-     "discount": 55,
-     "sales": 5363,
-     "rating": 4.9,
-     "commission": 2.84,
-     "affiliateLink": "https://s.shopee.com.br/8VASEPzfAK",
-     "vendasPeriodo": 64
+     "commission": 14.76,
+     "affiliateLink": "https://s.shopee.com.br/5VWsESRac6",
+     "vendasPeriodo": 212
     }
    ],
    "casa": [
@@ -883,11 +883,11 @@
      "newPrice": 8.99,
      "oldPrice": 25.69,
      "discount": 65,
-     "sales": 76430,
+     "sales": 76862,
      "rating": 4.5,
      "commission": 0.9,
      "affiliateLink": "https://s.shopee.com.br/3g5CTa8BnP",
-     "vendasPeriodo": 4157
+     "vendasPeriodo": 4589
     },
     {
      "itemId": "22893738408",
@@ -897,25 +897,25 @@
      "newPrice": 14.99,
      "oldPrice": 49.97,
      "discount": 70,
-     "sales": 59946,
+     "sales": 60906,
      "rating": 4.8,
      "commission": 2.25,
      "affiliateLink": "https://s.shopee.com.br/2qW5U3BMUG",
-     "vendasPeriodo": 3436
+     "vendasPeriodo": 4396
     },
     {
      "itemId": "19798129665",
      "shopId": "1384073074",
      "name": "Fita Selante De Pvc À Prova D 'Água Para Cozinha / Banheiro / Banheira",
      "image": "https://cf.shopee.com.br/file/sg-11134201-7reom-m8urr8l8bo2x62",
-     "newPrice": 10.5,
-     "oldPrice": 32.81,
+     "newPrice": 10,
+     "oldPrice": 31.25,
      "discount": 68,
-     "sales": 13400,
+     "sales": 14324,
      "rating": 4.7,
-     "commission": 1.37,
-     "affiliateLink": "https://s.shopee.com.br/1BNrUzHhsA",
-     "vendasPeriodo": 3189
+     "commission": 1.3,
+     "affiliateLink": "https://s.shopee.com.br/5q9id1IayL",
+     "vendasPeriodo": 4113
     },
     {
      "itemId": "21998858555",
@@ -925,11 +925,11 @@
      "newPrice": 9.9,
      "oldPrice": 24.75,
      "discount": 60,
-     "sales": 9260,
+     "sales": 9533,
      "rating": 4.6,
      "commission": 2.57,
-     "affiliateLink": "https://s.shopee.com.br/1W0htbGRCO",
-     "vendasPeriodo": 1216
+     "affiliateLink": "https://s.shopee.com.br/9fMRC1nLfu",
+     "vendasPeriodo": 1489
     },
     {
      "itemId": "23093960843",
@@ -939,11 +939,11 @@
      "newPrice": 11.45,
      "oldPrice": 27.26,
      "discount": 58,
-     "sales": 19172,
+     "sales": 19644,
      "rating": 4.9,
      "commission": 1.15,
      "affiliateLink": "https://s.shopee.com.br/4fxjfPVBW5",
-     "vendasPeriodo": 1009
+     "vendasPeriodo": 1481
     },
     {
      "itemId": "22494391164",
@@ -953,11 +953,11 @@
      "newPrice": 10,
      "oldPrice": 14.93,
      "discount": 33,
-     "sales": 21017,
+     "sales": 21268,
      "rating": 4.8,
      "commission": 1.6,
      "affiliateLink": "https://s.shopee.com.br/5Au0GL2Tko",
-     "vendasPeriodo": 912
+     "vendasPeriodo": 1163
     },
     {
      "itemId": "23096150316",
@@ -967,25 +967,11 @@
      "newPrice": 9.89,
      "oldPrice": 26.03,
      "discount": 62,
-     "sales": 8136,
+     "sales": 8297,
      "rating": 4.9,
      "commission": 2.57,
-     "affiliateLink": "https://s.shopee.com.br/4LKtGnWSC7",
-     "vendasPeriodo": 902
-    },
-    {
-     "itemId": "58253567352",
-     "shopId": "1412103756",
-     "name": "Faca Cutelo e Camping Artesanal, Aço Inox Afiado com Bainha de Couro Legítimo, Ideal para Desossar Carne e Aventura",
-     "image": "https://cf.shopee.com.br/file/sg-11134201-8260n-mjnui2ml5rls51",
-     "newPrice": 15.99,
-     "oldPrice": 32.63,
-     "discount": 51,
-     "sales": 9708,
-     "rating": 4.8,
-     "commission": 1.76,
-     "affiliateLink": "https://s.shopee.com.br/9zzG1Dk4xF",
-     "vendasPeriodo": 807
+     "affiliateLink": "https://s.shopee.com.br/8pnKCUqWMv",
+     "vendasPeriodo": 1063
     },
     {
      "itemId": "23798560672",
@@ -995,28 +981,84 @@
      "newPrice": 12.9,
      "oldPrice": 18.97,
      "discount": 32,
-     "sales": 11939,
+     "sales": 12220,
      "rating": 4.8,
      "commission": 0.77,
      "affiliateLink": "https://s.shopee.com.br/1qdYIDFAWU",
-     "vendasPeriodo": 769
+     "vendasPeriodo": 1050
     },
     {
      "itemId": "58258562285",
      "shopId": "1795268131",
      "name": "Suporte Organizador De Ovos Dispenser Para Geladeira Prático Anti-Queda Utensílios De Cozinha Original",
      "image": "https://cf.shopee.com.br/file/sg-11134201-81zvu-mmvetjba5xq9cb",
-     "newPrice": 10.98,
-     "oldPrice": 22.41,
-     "discount": 51,
-     "sales": 6768,
+     "newPrice": 4.99,
+     "oldPrice": 19.96,
+     "discount": 75,
+     "sales": 7025,
      "rating": 4.9,
-     "commission": 1.32,
-     "affiliateLink": "https://s.shopee.com.br/4VeJT6Vor8",
-     "vendasPeriodo": 764
+     "commission": 0.6,
+     "affiliateLink": "https://s.shopee.com.br/2LZqSaVv4y",
+     "vendasPeriodo": 1021
+    },
+    {
+     "itemId": "58253567352",
+     "shopId": "1412103756",
+     "name": "Faca Cutelo e Camping Artesanal, Aço Inox Afiado com Bainha de Couro Legítimo, Ideal para Desossar Carne e Aventura",
+     "image": "https://cf.shopee.com.br/file/sg-11134201-8260n-mjnui2ml5rls51",
+     "newPrice": 15.99,
+     "oldPrice": 32.63,
+     "discount": 51,
+     "sales": 9905,
+     "rating": 4.8,
+     "commission": 1.76,
+     "affiliateLink": "https://s.shopee.com.br/9pfrON3MrF",
+     "vendasPeriodo": 1004
     }
    ],
    "beauty": [
+    {
+     "itemId": "55865986117",
+     "shopId": "457864097",
+     "name": "JBSARA Revive Spicule Shot 102 Ampoule Serum 1g 1ea",
+     "image": "https://cf.shopee.com.br/file/sg-11134207-8258w-mrv26l1j53igaa",
+     "newPrice": 3.49,
+     "oldPrice": 9.43,
+     "discount": 63,
+     "sales": 40896,
+     "rating": 5,
+     "commission": 0.56,
+     "affiliateLink": "https://s.shopee.com.br/8pnKCaEtqY",
+     "vendasPeriodo": 13050
+    },
+    {
+     "itemId": "23993471317",
+     "shopId": "1347491961",
+     "name": "BB CreamBase/Corretivo com Esponja com Formato de Cogumelo Base Clareador Maquiagem Creme Clareador Cor Marfim e Natural",
+     "image": "https://cf.shopee.com.br/file/br-11134207-7r98o-m1jvmgodmffube",
+     "newPrice": 27.59,
+     "oldPrice": 35.37,
+     "discount": 22,
+     "sales": 19714,
+     "rating": 4.9,
+     "commission": 3.03,
+     "affiliateLink": "https://s.shopee.com.br/8Kr3bedCoE",
+     "vendasPeriodo": 3500
+    },
+    {
+     "itemId": "21235699753",
+     "shopId": "711418084",
+     "name": "Fadvan 5D W Extensões De Cílios Em Forma De 0.07 C/D Faux Mink Natural Lashes Profissionais Suaves",
+     "image": "https://cf.shopee.com.br/file/cn-11134207-820l4-mv13hxd19hxd38",
+     "newPrice": 20.99,
+     "oldPrice": 58.31,
+     "discount": 64,
+     "sales": 22561,
+     "rating": 4.8,
+     "commission": 3.36,
+     "affiliateLink": "https://s.shopee.com.br/8AXdPLdq9B",
+     "vendasPeriodo": 3286
+    },
     {
      "itemId": "58212716558",
      "shopId": "1855095856",
@@ -1025,11 +1067,11 @@
      "newPrice": 36.99,
      "oldPrice": 60.64,
      "discount": 39,
-     "sales": 27158,
+     "sales": 27563,
      "rating": 4.9,
      "commission": 8.88,
      "affiliateLink": "https://s.shopee.com.br/6AmXSGrMrr",
-     "vendasPeriodo": 2634
+     "vendasPeriodo": 3039
     },
     {
      "itemId": "41557489268",
@@ -1039,11 +1081,11 @@
      "newPrice": 39.9,
      "oldPrice": 79.8,
      "discount": 50,
-     "sales": 18587,
+     "sales": 19032,
      "rating": 4.9,
      "commission": 9.98,
      "affiliateLink": "https://s.shopee.com.br/60T7Fxs0Co",
-     "vendasPeriodo": 2076
+     "vendasPeriodo": 2521
     },
     {
      "itemId": "58212431677",
@@ -1053,25 +1095,39 @@
      "newPrice": 13.99,
      "oldPrice": 21.52,
      "discount": 35,
-     "sales": 9404,
+     "sales": 9883,
      "rating": 4.9,
      "commission": 1.4,
      "affiliateLink": "https://s.shopee.com.br/5Au0GQvAtm",
-     "vendasPeriodo": 1877
+     "vendasPeriodo": 2356
     },
     {
-     "itemId": "58262782056",
-     "shopId": "1855095856",
-     "name": "Sérum Leave-in com Tecnologia Ativada por Calor para Efeito Liso, Antifrizz, L'Oréal Paris Elseve Liso dos Sonhos 100ml",
-     "image": "https://cf.shopee.com.br/file/br-11134207-820md-mpmi7ellauwy82",
+     "itemId": "58270243088",
+     "shopId": "1860098702",
+     "name": "Protetor Solar Facial Hidrabene FPS 70 Toque Seco - 50g",
+     "image": "https://cf.shopee.com.br/file/br-11134207-820me-mu5trnacuq691b",
      "newPrice": 36.9,
-     "oldPrice": 61.5,
-     "discount": 40,
-     "sales": 12071,
-     "rating": 5,
-     "commission": 7.38,
-     "affiliateLink": "https://s.shopee.com.br/40i2sHzcGb",
-     "vendasPeriodo": 1480
+     "oldPrice": 36.9,
+     "discount": 0,
+     "sales": 12159,
+     "rating": 4.9,
+     "commission": 6.64,
+     "affiliateLink": "https://s.shopee.com.br/9pfrOQB5om",
+     "vendasPeriodo": 2252
+    },
+    {
+     "itemId": "49912454334",
+     "shopId": "1461479318",
+     "name": "Maria 5D W M Curl UC/UD Cílios Fácil LU Ventilador Extensões De Atacado Volume Pré-Fabricado Estilo W Natural Macio",
+     "image": "https://cf.shopee.com.br/file/cn-11134207-820l4-mpj7tsq5r0gb60",
+     "newPrice": 19,
+     "oldPrice": 35.19,
+     "discount": 46,
+     "sales": 10441,
+     "rating": 4.6,
+     "commission": 2.09,
+     "affiliateLink": "https://s.shopee.com.br/8VATnxcZTH",
+     "vendasPeriodo": 1856
     },
     {
      "itemId": "58254438880",
@@ -1081,84 +1137,42 @@
      "newPrice": 11.99,
      "oldPrice": 26.64,
      "discount": 55,
-     "sales": 16075,
+     "sales": 16356,
      "rating": 4.8,
      "commission": 1.2,
      "affiliateLink": "https://s.shopee.com.br/5q9h3esdXp",
-     "vendasPeriodo": 1476
+     "vendasPeriodo": 1757
     },
     {
-     "itemId": "22793516674",
-     "shopId": "1398532513",
-     "name": "Máquina De Cortar Cabelo Para Barba Masculina Designer Aleatório Elétrico Profissional",
-     "image": "https://cf.shopee.com.br/file/sg-11134201-7req6-m2ck7qvnzjxy5c",
-     "newPrice": 14.98,
-     "oldPrice": 18.05,
-     "discount": 17,
-     "sales": 8647,
-     "rating": 4.8,
-     "commission": 0.9,
-     "affiliateLink": "https://s.shopee.com.br/4qH9rowRZg",
-     "vendasPeriodo": 981
-    },
-    {
-     "itemId": "40815571485",
-     "shopId": "1441157744",
-     "name": "CRONOGRAMA CAPILAR 5 EM 1 TEIA PASSO ÚNICO - H.N.R.R.P - FINA MARIA",
-     "image": "https://cf.shopee.com.br/file/sg-11134201-825ak-mr1yspqi0ow563",
-     "newPrice": 39.9,
-     "oldPrice": 79.8,
-     "discount": 50,
-     "sales": 10652,
+     "itemId": "21299677651",
+     "shopId": "1485160784",
+     "name": "BB CreamBase/Corretivo com Esponja com Formato de Cogumelo Base Clareador Maquiagem Creme Clareador Cor Marfim e Natural",
+     "image": "https://cf.shopee.com.br/file/sg-11134201-7reop-m817hciex8sg71",
+     "newPrice": 31.66,
+     "oldPrice": 44.59,
+     "discount": 29,
+     "sales": 12330,
      "rating": 4.9,
-     "commission": 7.98,
-     "affiliateLink": "https://s.shopee.com.br/5LDQSjuXYk",
-     "vendasPeriodo": 922
-    },
-    {
-     "itemId": "25946709329",
-     "shopId": "1441157744",
-     "name": "ULTRA HIDRATAÇÃO EFEITO TEIA COM ÓLEOS MARROQUINOS - OURO MARROQUINO - FINA MARIA PROFISSIONAL",
-     "image": "https://cf.shopee.com.br/file/sg-11134201-8258h-mr1ynaykoao016",
-     "newPrice": 39.97,
-     "oldPrice": 79.94,
-     "discount": 50,
-     "sales": 34421,
-     "rating": 4.9,
-     "commission": 7.99,
-     "affiliateLink": "https://s.shopee.com.br/6VPNqsq6Bt",
-     "vendasPeriodo": 845
-    },
-    {
-     "itemId": "23394267693",
-     "shopId": "1553099932",
-     "name": "Shampoo Escurecedor Cabelos Brancos Tonalizante Colored 300ml Efeito 100% Natural Super Resultado",
-     "image": "https://cf.shopee.com.br/file/br-11134207-820mf-mmajzmcmll3a15",
-     "newPrice": 14.99,
-     "oldPrice": 71.38,
-     "discount": 79,
-     "sales": 9819,
-     "rating": 4.6,
-     "commission": 3.15,
-     "affiliateLink": "https://s.shopee.com.br/4fxjfVx4uf",
-     "vendasPeriodo": 759
-    },
-    {
-     "itemId": "23798710869",
-     "shopId": "1045085918",
-     "name": "Lavitan Cabelos e Unhas 30 Comprimidos - Cimed",
-     "image": "https://cf.shopee.com.br/file/br-11134207-81z1k-mdz4bsq0i29s68",
-     "newPrice": 10.99,
-     "oldPrice": 22.43,
-     "discount": 51,
-     "sales": 11742,
-     "rating": 4.9,
-     "commission": 1.1,
-     "affiliateLink": "https://s.shopee.com.br/5VWqf2tuDn",
-     "vendasPeriodo": 726
+     "commission": 4.75,
+     "affiliateLink": "https://s.shopee.com.br/8fTu0Gbw8K",
+     "vendasPeriodo": 1630
     }
    ],
    "tech": [
+    {
+     "itemId": "48717947960",
+     "shopId": "1604972581",
+     "name": "Fone De Ouvido Inpods 13 Bluetooth Sem Fio Com Microfone Fones esportivos Adequado Branco",
+     "image": "https://cf.shopee.com.br/file/sg-11134201-825bb-mt7fxycgurra13",
+     "newPrice": 19.99,
+     "oldPrice": 68.93,
+     "discount": 71,
+     "sales": 6863,
+     "rating": 4.7,
+     "commission": 1.2,
+     "affiliateLink": "https://s.shopee.com.br/1W0jT7gLQa",
+     "vendasPeriodo": 1883
+    },
     {
      "itemId": "22793090494",
      "shopId": "328666563",
@@ -1167,25 +1181,11 @@
      "newPrice": 20.99,
      "oldPrice": 59.97,
      "discount": 65,
-     "sales": 6821,
+     "sales": 7082,
      "rating": 4.7,
      "commission": 1.26,
-     "affiliateLink": "https://s.shopee.com.br/9pfpp18YCK",
-     "vendasPeriodo": 1542
-    },
-    {
-     "itemId": "40101081460",
-     "shopId": "1006215031",
-     "name": "Suporte Para Telefone Principal Alça De Montagem Ajustável Multifuncional Tiro Ao Vivo Primeira Pessoa Com Clipe",
-     "image": "https://cf.shopee.com.br/file/sg-11134201-823p0-mp4mz19cdwy796",
-     "newPrice": 24.46,
-     "oldPrice": 24.96,
-     "discount": 2,
-     "sales": 14966,
-     "rating": 4.9,
-     "commission": 2.45,
-     "affiliateLink": "https://s.shopee.com.br/2qW5UAhjSG",
-     "vendasPeriodo": 1156
+     "affiliateLink": "https://s.shopee.com.br/1LhJGogylZ",
+     "vendasPeriodo": 1803
     },
     {
      "itemId": "40331456554",
@@ -1195,39 +1195,25 @@
      "newPrice": 19.29,
      "oldPrice": 21.43,
      "discount": 10,
-     "sales": 18467,
+     "sales": 18652,
      "rating": 4.8,
      "commission": 3.09,
      "affiliateLink": "https://s.shopee.com.br/AUvWcF60qO",
-     "vendasPeriodo": 995
+     "vendasPeriodo": 1180
     },
     {
      "itemId": "22892686035",
      "shopId": "987393610",
      "name": "Fone de Ouvido entrada lightning para Iphone Microfone Bluetooth",
      "image": "https://cf.shopee.com.br/file/sg-11134201-7rbkc-lpcgfnwj651k1e",
-     "newPrice": 9.48,
-     "oldPrice": 29.63,
-     "discount": 68,
-     "sales": 5652,
+     "newPrice": 8.99,
+     "oldPrice": 29.97,
+     "discount": 70,
+     "sales": 5873,
      "rating": 4.7,
-     "commission": 1.33,
-     "affiliateLink": "https://s.shopee.com.br/9fMPci9BXJ",
-     "vendasPeriodo": 941
-    },
-    {
-     "itemId": "23091546001",
-     "shopId": "832040275",
-     "name": "Amplificador De Imagem Da Tela Do Celular Lupa 3D 21,6CM*16,6CM*2,7CM Promoção",
-     "image": "https://cf.shopee.com.br/file/sg-11134201-8259l-mskzqxceqnm23c",
-     "newPrice": 16.98,
-     "oldPrice": 29.79,
-     "discount": 43,
-     "sales": 10803,
-     "rating": 4.6,
-     "commission": 4.41,
-     "affiliateLink": "https://s.shopee.com.br/3g5CTheYlP",
-     "vendasPeriodo": 863
+     "commission": 1.26,
+     "affiliateLink": "https://s.shopee.com.br/ql2ftismW",
+     "vendasPeriodo": 1162
     },
     {
      "itemId": "23798855636",
@@ -1237,39 +1223,39 @@
      "newPrice": 16.99,
      "oldPrice": 41.44,
      "discount": 59,
-     "sales": 5140,
+     "sales": 5288,
      "rating": 4.8,
      "commission": 1.02,
-     "affiliateLink": "https://s.shopee.com.br/9V2zQP9osI",
-     "vendasPeriodo": 836
+     "affiliateLink": "https://s.shopee.com.br/1gK9fQfi5f",
+     "vendasPeriodo": 984
     },
     {
      "itemId": "8514428979",
      "shopId": "341061019",
      "name": "Fone De Ouvido Sem Fio E6s Bluetooth 5.0  Tws Preto",
      "image": "https://cf.shopee.com.br/file/sg-11134201-822yz-mi8voaunyole28",
-     "newPrice": 18.5,
-     "oldPrice": 48.68,
-     "discount": 62,
-     "sales": 4544,
+     "newPrice": 19.99,
+     "oldPrice": 48.76,
+     "discount": 59,
+     "sales": 4694,
      "rating": 4.7,
-     "commission": 1.11,
-     "affiliateLink": "https://s.shopee.com.br/8AXbpxEtaA",
-     "vendasPeriodo": 687
+     "commission": 1.2,
+     "affiliateLink": "https://s.shopee.com.br/4fxlEwUI0P",
+     "vendasPeriodo": 837
     },
     {
-     "itemId": "22397182247",
-     "shopId": "987393610",
-     "name": "Carregador iPhone Turbo Tipo-C 20W + Cabo Lightining para IPhone Carga rápida",
-     "image": "https://cf.shopee.com.br/file/sg-11134201-7rbkw-lpcg9rytbas79a",
-     "newPrice": 15.49,
-     "oldPrice": 49.97,
-     "discount": 69,
-     "sales": 9424,
+     "itemId": "22794271989",
+     "shopId": "1577854515",
+     "name": "Fone P47 Headphone Sem Fio Estéreo Redução de Ruídos Bluetooth 5.0 Universal",
+     "image": "https://cf.shopee.com.br/file/sg-11134201-7rdym-mctjrn6q55a16e",
+     "newPrice": 18.87,
+     "oldPrice": 29.03,
+     "discount": 35,
+     "sales": 5148,
      "rating": 4.8,
-     "commission": 2.17,
-     "affiliateLink": "https://s.shopee.com.br/2gCfHriMnF",
-     "vendasPeriodo": 585
+     "commission": 1.13,
+     "affiliateLink": "https://s.shopee.com.br/1BNt4Vhc6c",
+     "vendasPeriodo": 361
     },
     {
      "itemId": "43831244046",
@@ -1279,11 +1265,11 @@
      "newPrice": 56.99,
      "oldPrice": 64.76,
      "discount": 12,
-     "sales": 2656,
+     "sales": 2695,
      "rating": 4.8,
      "commission": 3.42,
      "affiliateLink": "https://s.shopee.com.br/7Af4e8vYHn",
-     "vendasPeriodo": 313
+     "vendasPeriodo": 352
     },
     {
      "itemId": "58216433905",
@@ -1293,11 +1279,25 @@
      "newPrice": 17.99,
      "oldPrice": 43.88,
      "discount": 59,
-     "sales": 6219,
+     "sales": 6233,
      "rating": 4.8,
      "commission": 1.08,
-     "affiliateLink": "https://s.shopee.com.br/9KjZE6ASDH",
-     "vendasPeriodo": 272
+     "affiliateLink": "https://s.shopee.com.br/gRcTajW7V",
+     "vendasPeriodo": 286
+    },
+    {
+     "itemId": "22997591579",
+     "shopId": "1060793149",
+     "name": "Air Pro 4 Tws Fone De Ouvido Sem Fio Bluetooth 5.1Mini Fones Esportivos Para Android / Ios iphone",
+     "image": "https://cf.shopee.com.br/file/sg-11134201-7rd3v-lwp2d1s7sky0f0",
+     "newPrice": 19.99,
+     "oldPrice": 60.58,
+     "discount": 67,
+     "sales": 4755,
+     "rating": 4.6,
+     "commission": 1.2,
+     "affiliateLink": "https://s.shopee.com.br/3g5E36Y62N",
+     "vendasPeriodo": 285
     }
    ],
    "style": [
@@ -1309,11 +1309,11 @@
      "newPrice": 13.9,
      "oldPrice": 15.98,
      "discount": 13,
-     "sales": 7519,
+     "sales": 8453,
      "rating": 4.8,
      "commission": 1.81,
      "affiliateLink": "https://s.shopee.com.br/1qdYIMKGQ6",
-     "vendasPeriodo": 2792
+     "vendasPeriodo": 3726
     },
     {
      "itemId": "22594546423",
@@ -1323,11 +1323,11 @@
      "newPrice": 14.97,
      "oldPrice": 25.81,
      "discount": 42,
-     "sales": 5463,
+     "sales": 5712,
      "rating": 4.8,
      "commission": 2.54,
      "affiliateLink": "https://s.shopee.com.br/5VWqf79tB3",
-     "vendasPeriodo": 490
+     "vendasPeriodo": 739
     },
     {
      "itemId": "56057690048",
@@ -1337,11 +1337,11 @@
      "newPrice": 134.99,
      "oldPrice": 155.16,
      "discount": 13,
-     "sales": 5451,
+     "sales": 5574,
      "rating": 4.9,
      "commission": 8.1,
      "affiliateLink": "https://s.shopee.com.br/6VPNqx659L",
-     "vendasPeriodo": 458
+     "vendasPeriodo": 581
     },
     {
      "itemId": "57113764077",
@@ -1351,39 +1351,39 @@
      "newPrice": 53.99,
      "oldPrice": 138.44,
      "discount": 61,
-     "sales": 3858,
+     "sales": 3941,
      "rating": 4.9,
      "commission": 5.4,
      "affiliateLink": "https://s.shopee.com.br/7KyUqU2uSa",
-     "vendasPeriodo": 425
+     "vendasPeriodo": 508
     },
     {
      "itemId": "53206856617",
      "shopId": "426378412",
      "name": "Lovito Nacional Vestido Casual Feminino Primavera/verão LK4LD398",
      "image": "https://cf.shopee.com.br/file/sg-11134201-825b5-mvfk0xy1su1092",
-     "newPrice": 56.9,
-     "oldPrice": 82.46,
-     "discount": 31,
-     "sales": 2304,
+     "newPrice": 55.76,
+     "oldPrice": 82,
+     "discount": 32,
+     "sales": 2401,
      "rating": 4.9,
-     "commission": 5.69,
-     "affiliateLink": "https://s.shopee.com.br/8VASEbustm",
-     "vendasPeriodo": 401
+     "commission": 5.58,
+     "affiliateLink": "https://s.shopee.com.br/3qOeFSsBCO",
+     "vendasPeriodo": 498
     },
     {
      "itemId": "21797728567",
      "shopId": "390307022",
      "name": "Arara 4/5 Andares Multiuso c/ Sapateira, Cabideiro e Suporte p/ Roupas, Tênis e Closet Quarto",
      "image": "https://cf.shopee.com.br/file/sg-11134201-7req6-m8dk5gglfv7k20",
-     "newPrice": 41.48,
-     "oldPrice": 172.83,
-     "discount": 76,
-     "sales": 4215,
+     "newPrice": 40.49,
+     "oldPrice": 176.04,
+     "discount": 77,
+     "sales": 4333,
      "rating": 4.8,
-     "commission": 4.98,
+     "commission": 4.86,
      "affiliateLink": "https://s.shopee.com.br/6AmXSL7LpF",
-     "vendasPeriodo": 377
+     "vendasPeriodo": 495
     },
     {
      "itemId": "4685526528",
@@ -1393,11 +1393,11 @@
      "newPrice": 10.99,
      "oldPrice": 13.74,
      "discount": 20,
-     "sales": 5413,
+     "sales": 5523,
      "rating": 4.8,
      "commission": 0.66,
      "affiliateLink": "https://s.shopee.com.br/5LDQSmXk3l",
-     "vendasPeriodo": 327
+     "vendasPeriodo": 437
     },
     {
      "itemId": "57008381938",
@@ -1407,11 +1407,11 @@
      "newPrice": 61.99,
      "oldPrice": 99.98,
      "discount": 38,
-     "sales": 3628,
+     "sales": 3685,
      "rating": 4.8,
      "commission": 3.72,
      "affiliateLink": "https://s.shopee.com.br/7fbLF61dmg",
-     "vendasPeriodo": 306
+     "vendasPeriodo": 363
     },
     {
      "itemId": "23198072057",
@@ -1421,25 +1421,25 @@
      "newPrice": 37.58,
      "oldPrice": 98.89,
      "discount": 62,
-     "sales": 2197,
+     "sales": 2267,
      "rating": 4.9,
      "commission": 4.13,
      "affiliateLink": "https://s.shopee.com.br/4fxjfYaHPp",
-     "vendasPeriodo": 255
+     "vendasPeriodo": 325
     },
     {
-     "itemId": "22410204340",
-     "shopId": "825207596",
-     "name": "Vestido QUEIMA DE ESTOQUE! Envio Rápido casual mais vendidos  fenda lateral MIDI de bolso  moda feminina  verão  tubinho",
-     "image": "https://cf.shopee.com.br/file/br-11134201-820lz-mvcnz8a9atc043",
-     "newPrice": 29.99,
-     "oldPrice": 29.99,
+     "itemId": "23497594302",
+     "shopId": "1198407784",
+     "name": "ROMANTIC CROWN Mochila de Viagem Expansível, Bolsa Executiva Notebook Masculina e Feminina Trabalho,Grande,Reforçada",
+     "image": "https://cf.shopee.com.br/file/br-11134207-820la-mu7g0m7pk9vl21",
+     "newPrice": 99.98,
+     "oldPrice": 99.98,
      "discount": 0,
-     "sales": 2675,
-     "rating": 4.5,
-     "commission": 1.8,
-     "affiliateLink": "https://s.shopee.com.br/1Bu6zRF8r",
-     "vendasPeriodo": 222
+     "sales": 3440,
+     "rating": 5,
+     "commission": 11,
+     "affiliateLink": "https://s.shopee.com.br/4VeJTFaukk",
+     "vendasPeriodo": 292
     }
    ]
   }
